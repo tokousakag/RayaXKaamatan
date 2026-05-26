@@ -1,1415 +1,1478 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kaamatan & Aidiladha 2026 — Sabah Bersatu</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Poppins:wght@300;400;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
-  <style>
-    /* ===== RESET & BASE ===== */
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: #0a0a1a;
-      color: #fff;
-      overflow-x: hidden;
-    }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<meta name="theme-color" content="#0a0010"/>
+<title>🌾🌙 Kaamatan × Aidiladha 2026 — Sabah Bersatu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Poppins:ital,wght@0,300;0,400;0,600;0,700;0,900;1,400&family=Amiri:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+/* ==============================
+   RESET & ROOT
+============================== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#f4c430;--gold2:#ff9d00;--gold3:#ffe066;
+  --green:#2e8b57;--green2:#7cb942;--green3:#a8e063;
+  --purple:#9b59b6;--pink:#e91e8c;
+  --dark:#06000f;--dark2:#0e0520;--dark3:#16082e;
+  --glass:rgba(255,255,255,0.05);
+  --glass2:rgba(255,255,255,0.08);
+  --border:rgba(255,255,255,0.08);
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Poppins',sans-serif;background:var(--dark);color:#fff;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--dark)}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--gold),var(--green));border-radius:4px}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;font-family:'Poppins',sans-serif;border:none;background:none}
 
-    /* ===== SCROLLBAR ===== */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #0a0a1a; }
-    ::-webkit-scrollbar-thumb { background: linear-gradient(#f4a825, #2e8b57); border-radius: 3px; }
+/* ==============================
+   AURORA BACKGROUND
+============================== */
+#aurora{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.aurora-blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:0.18;animation:auroraMove 12s ease-in-out infinite alternate}
+.ab1{width:700px;height:700px;background:radial-gradient(circle,#f4c430,transparent);top:-200px;left:-200px;animation-delay:0s}
+.ab2{width:600px;height:600px;background:radial-gradient(circle,#2e8b57,transparent);bottom:-100px;right:-100px;animation-delay:-3s}
+.ab3{width:500px;height:500px;background:radial-gradient(circle,#9b59b6,transparent);top:40%;left:50%;animation-delay:-6s}
+.ab4{width:400px;height:400px;background:radial-gradient(circle,#e91e8c,transparent);top:20%;right:10%;animation-delay:-9s}
+@keyframes auroraMove{
+  0%{transform:translate(0,0) scale(1)}
+  100%{transform:translate(80px,60px) scale(1.15)}
+}
 
-    /* ===== CANVAS BACKGROUND ===== */
-    #bgCanvas {
-      position: fixed; top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: 0; pointer-events: none;
-    }
+/* ==============================
+   CANVAS LAYERS
+============================== */
+#fwCanvas,#particleCanvas{position:fixed;inset:0;z-index:1;pointer-events:none}
 
-    /* ===== FLOATING PARTICLES ===== */
-    .particle-container {
-      position: fixed; top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: 1; pointer-events: none;
-      overflow: hidden;
-    }
-    .particle {
-      position: absolute;
-      border-radius: 50%;
-      animation: floatUp linear infinite;
-      opacity: 0;
-    }
-    @keyframes floatUp {
-      0%   { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
-      10%  { opacity: 1; }
-      90%  { opacity: 0.6; }
-      100% { transform: translateY(-10vh) translateX(30px) rotate(360deg); opacity: 0; }
-    }
+/* ==============================
+   FLOATING ELEMENTS
+============================== */
+.floaters{position:fixed;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+.floater{position:absolute;animation:floaterRise linear infinite;opacity:0;font-size:1.4rem}
+@keyframes floaterRise{
+  0%{transform:translateY(110vh) translateX(0) rotate(0);opacity:0}
+  8%{opacity:1}
+  92%{opacity:.7}
+  100%{transform:translateY(-10vh) translateX(40px) rotate(360deg);opacity:0}
+}
 
-    /* ===== LANTERN FLOAT ===== */
-    .lantern-container {
-      position: fixed; top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: 1; pointer-events: none;
-      overflow: hidden;
-    }
-    .lantern {
-      position: absolute;
-      bottom: -100px;
-      animation: lanternRise linear infinite;
-      filter: blur(0.5px);
-    }
-    .lantern svg { display: block; }
-    @keyframes lanternRise {
-      0%   { transform: translateY(0) rotate(-5deg) scale(0.8); opacity: 0; }
-      5%   { opacity: 1; }
-      50%  { transform: translateY(-55vh) rotate(5deg) scale(1); opacity: 0.9; }
-      100% { transform: translateY(-110vh) rotate(-3deg) scale(0.9); opacity: 0; }
-    }
+/* ==============================
+   NAVBAR
+============================== */
+.navbar{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  padding:.8rem 1.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:all .4s;
+}
+.navbar.stuck{
+  background:rgba(6,0,15,.9);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  box-shadow:0 4px 30px rgba(0,0,0,.5);
+}
+.nb-brand{
+  font-family:'Cinzel Decorative',serif;font-size:.9rem;font-weight:700;
+  background:linear-gradient(135deg,var(--gold),var(--green));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.nb-links{display:flex;gap:1.2rem;list-style:none}
+.nb-links a{font-size:.8rem;color:rgba(255,255,255,.55);transition:color .3s}
+.nb-links a:hover{color:var(--gold)}
+@media(max-width:480px){.nb-links{display:none}}
 
-    /* ===== RICE STALK ANIMATION ===== */
-    .rice-container {
-      position: fixed; bottom: 0; left: 0;
-      width: 100%; height: 200px;
-      z-index: 1; pointer-events: none;
-      overflow: hidden;
-    }
-    .rice-stalk {
-      position: absolute;
-      bottom: 0;
-      width: 3px;
-      background: linear-gradient(to top, #2d5a1b, #7cb942, #f4c430);
-      border-radius: 2px;
-      transform-origin: bottom center;
-      animation: riceWave ease-in-out infinite alternate;
-    }
-    .rice-stalk::after {
-      content: '🌾';
-      position: absolute;
-      top: -20px;
-      left: -8px;
-      font-size: 18px;
-    }
-    @keyframes riceWave {
-      from { transform: rotate(-8deg); }
-      to   { transform: rotate(8deg); }
-    }
+/* ==============================
+   BOTTOM NAV (MOBILE)
+============================== */
+.bottom-nav{
+  display:none;
+  position:fixed;bottom:0;left:0;right:0;z-index:200;
+  background:rgba(6,0,15,.95);
+  backdrop-filter:blur(20px);
+  border-top:1px solid var(--border);
+  padding:.5rem 0;
+}
+.bn-items{display:flex;justify-content:space-around}
+.bn-item{
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  padding:.4rem .6rem;border-radius:10px;
+  font-size:.6rem;color:rgba(255,255,255,.4);
+  transition:all .3s;
+}
+.bn-item.active,.bn-item:hover{color:var(--gold)}
+.bn-item .bn-icon{font-size:1.3rem}
+@media(max-width:600px){.bottom-nav{display:block}}
 
-    /* ===== MOON CRESCENT ===== */
-    .moon-crescent {
-      position: fixed; top: 40px; right: 60px;
-      z-index: 2; pointer-events: none;
-      animation: moonGlow 3s ease-in-out infinite alternate;
-    }
-    @keyframes moonGlow {
-      from { filter: drop-shadow(0 0 15px #ffe066) drop-shadow(0 0 30px #f4a825); }
-      to   { filter: drop-shadow(0 0 30px #ffe066) drop-shadow(0 0 60px #ff9900); }
-    }
-    .star-field {
-      position: fixed; top: 0; left: 0;
-      width: 100%; height: 60%;
-      z-index: 1; pointer-events: none;
-    }
-    .star {
-      position: absolute;
-      background: #fff;
-      border-radius: 50%;
-      animation: twinkle ease-in-out infinite alternate;
-    }
-    @keyframes twinkle {
-      from { opacity: 0.2; transform: scale(0.8); }
-      to   { opacity: 1; transform: scale(1.2); }
-    }
+/* ==============================
+   HERO SECTION
+============================== */
+.hero{
+  min-height:100vh;min-height:100svh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:6rem 1.5rem 5rem;
+  position:relative;z-index:10;
+}
 
-    /* ===== MAIN CONTENT ===== */
-    .content { position: relative; z-index: 10; }
+.hero-pill{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.35rem 1.2rem;border-radius:99px;
+  border:1px solid rgba(244,196,48,.3);
+  background:rgba(244,196,48,.07);
+  font-size:.75rem;color:var(--gold3);letter-spacing:.1em;
+  margin-bottom:2rem;
+  animation:pillGlow 2.5s ease-in-out infinite;
+}
+@keyframes pillGlow{
+  0%,100%{box-shadow:0 0 0 0 rgba(244,196,48,0)}
+  50%{box-shadow:0 0 20px rgba(244,196,48,.25),0 0 0 4px rgba(244,196,48,.06)}
+}
 
-    /* ===== HERO SECTION ===== */
-    .hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      text-align: center;
-      padding: 2rem;
-      position: relative;
-      background: linear-gradient(180deg,
-        rgba(5,5,20,0.2) 0%,
-        rgba(20,60,20,0.15) 50%,
-        rgba(40,20,5,0.2) 100%);
-    }
+.hero-main-title{
+  font-family:'Cinzel Decorative',serif;
+  font-size:clamp(2.2rem,7vw,5.5rem);font-weight:900;
+  line-height:1.1;letter-spacing:-.01em;
+  position:relative;
+}
+.hmt-line1{
+  display:block;
+  background:linear-gradient(135deg,#fff 0%,var(--gold3) 30%,var(--gold) 60%,var(--gold2) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  background-size:200% auto;
+  animation:shimmerTitle 4s linear infinite;
+  filter:drop-shadow(0 0 30px rgba(244,196,48,.4));
+}
+.hmt-x{
+  display:inline-block;
+  font-size:clamp(1.5rem,5vw,3.5rem);
+  background:linear-gradient(135deg,var(--gold),var(--green));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin:.2rem 1.5rem;
+  animation:spinX 8s linear infinite;
+}
+@keyframes spinX{from{transform:rotate(0) scale(1)}50%{transform:rotate(180deg) scale(1.2)}to{transform:rotate(360deg) scale(1)}}
+.hmt-line2{
+  display:block;
+  background:linear-gradient(135deg,#fff 0%,var(--green3) 30%,var(--green2) 60%,var(--green) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  background-size:200% auto;
+  animation:shimmerTitle2 4s linear infinite;
+  filter:drop-shadow(0 0 30px rgba(46,139,87,.4));
+}
+@keyframes shimmerTitle{from{background-position:0% center}to{background-position:200% center}}
+@keyframes shimmerTitle2{from{background-position:200% center}to{background-position:0% center}}
 
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      padding: 0.4rem 1.2rem;
-      border: 1px solid rgba(244,168,37,0.4);
-      border-radius: 99px;
-      font-size: 0.85rem;
-      color: #f4c430;
-      background: rgba(244,168,37,0.08);
-      margin-bottom: 1.5rem;
-      animation: badgePulse 2s ease-in-out infinite;
-    }
-    @keyframes badgePulse {
-      0%,100% { box-shadow: 0 0 0 0 rgba(244,168,37,0.3); }
-      50%      { box-shadow: 0 0 0 8px rgba(244,168,37,0); }
-    }
+.hero-year-wrap{display:flex;align-items:center;justify-content:center;gap:1.5rem;margin:1.2rem 0}
+.hero-year{
+  font-size:clamp(3rem,12vw,9rem);font-weight:900;letter-spacing:.15em;
+  background:linear-gradient(90deg,var(--gold2),var(--gold3),var(--gold),var(--gold3),var(--gold2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  background-size:400% auto;
+  animation:yearScroll 3s linear infinite;
+  text-shadow:none;
+}
+@keyframes yearScroll{from{background-position:0% center}to{background-position:400% center}}
 
-    .hero-title-wrap {
-      position: relative;
-      margin-bottom: 1rem;
-    }
-    .hero-title-top {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: clamp(2.5rem, 7vw, 6rem);
-      font-weight: 900;
-      line-height: 1.1;
-      background: linear-gradient(135deg, #f4c430 0%, #fff 40%, #f4a825 70%, #ffe066 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-shadow: none;
-      animation: titleShimmer 4s linear infinite;
-      background-size: 200% auto;
-    }
-    @keyframes titleShimmer {
-      from { background-position: 0% center; }
-      to   { background-position: 200% center; }
-    }
-    .hero-title-divider {
-      display: flex; align-items: center; justify-content: center;
-      gap: 1rem; margin: 0.5rem 0;
-    }
-    .divider-line {
-      height: 2px; width: 80px;
-      background: linear-gradient(to right, transparent, #f4a825);
-    }
-    .divider-line.right {
-      background: linear-gradient(to left, transparent, #2e8b57);
-    }
-    .divider-icon { font-size: 1.8rem; animation: spin 8s linear infinite; }
-    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.hero-tagline{
+  font-size:clamp(.85rem,2.2vw,1.1rem);color:rgba(255,255,255,.6);
+  max-width:540px;line-height:1.9;margin:1.5rem auto 0;
+  animation:fadeUp .8s ease .5s both;
+}
+.hero-tagline strong{color:var(--gold3)}
+.hero-tagline em{color:var(--green3);font-style:normal}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 
-    .hero-title-bottom {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: clamp(2.5rem, 7vw, 6rem);
-      font-weight: 900;
-      line-height: 1.1;
-      background: linear-gradient(135deg, #2e8b57 0%, #7cb942 40%, #a8e063 70%, #2e8b57 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: titleShimmer2 4s linear infinite;
-      background-size: 200% auto;
-    }
-    @keyframes titleShimmer2 {
-      from { background-position: 0% center; }
-      to   { background-position: 200% center; }
-    }
+/* DATE BADGES */
+.date-badges{
+  display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;
+  margin:2.5rem 0;
+  animation:fadeUp .8s ease .7s both;
+}
+.db{
+  padding:.8rem 1.5rem;border-radius:16px;
+  display:flex;align-items:center;gap:.8rem;
+  position:relative;overflow:hidden;
+  transition:transform .3s,box-shadow .3s;
+  cursor:default;
+}
+.db:hover{transform:translateY(-4px)}
+.db::before{content:'';position:absolute;inset:0;border-radius:16px;opacity:0;transition:opacity .4s;background:inherit}
+.db-raya{
+  background:linear-gradient(135deg,rgba(244,168,37,.18),rgba(244,168,37,.06));
+  border:1px solid rgba(244,168,37,.35);
+  box-shadow:0 8px 32px rgba(244,168,37,.1),inset 0 1px 0 rgba(255,255,255,.08);
+}
+.db-raya:hover{box-shadow:0 16px 48px rgba(244,168,37,.2)}
+.db-kaamatan{
+  background:linear-gradient(135deg,rgba(46,139,87,.18),rgba(46,139,87,.06));
+  border:1px solid rgba(46,139,87,.35);
+  box-shadow:0 8px 32px rgba(46,139,87,.1),inset 0 1px 0 rgba(255,255,255,.08);
+}
+.db-kaamatan:hover{box-shadow:0 16px 48px rgba(46,139,87,.2)}
+.db-icon{font-size:1.8rem;animation:dbFloat 3s ease-in-out infinite alternate}
+.db-kaamatan .db-icon{animation-delay:.5s}
+@keyframes dbFloat{from{transform:translateY(0)}to{transform:translateY(-5px)}}
+.db-info{text-align:left}
+.db-label{font-size:.65rem;text-transform:uppercase;letter-spacing:.12em;opacity:.5;margin-bottom:.1rem}
+.db-date{font-size:.95rem;font-weight:700;line-height:1.2}
+.db-raya .db-date{color:var(--gold)}
+.db-kaamatan .db-date{color:var(--green2)}
+.db-sub{font-size:.7rem;opacity:.4;margin-top:.1rem}
 
-    .hero-year {
-      font-size: clamp(3rem, 10vw, 8rem);
-      font-weight: 900;
-      letter-spacing: 0.2em;
-      background: linear-gradient(90deg, #f4a825, #ffe066, #f4a825);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: yearPulse 2s ease-in-out infinite alternate;
-      background-size: 200% auto;
-    }
-    @keyframes yearPulse {
-      from { letter-spacing: 0.2em; background-position: 0%; }
-      to   { letter-spacing: 0.35em; background-position: 100%; }
-    }
+/* CTA BUTTONS */
+.hero-cta{
+  display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;
+  margin-top:.5rem;
+  animation:fadeUp .8s ease .9s both;
+}
+.btn-primary{
+  padding:.85rem 2rem;border-radius:99px;font-size:.9rem;font-weight:700;
+  background:linear-gradient(135deg,var(--gold2),var(--gold));
+  color:#1a0a00;letter-spacing:.05em;text-transform:uppercase;
+  position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s;
+  box-shadow:0 8px 32px rgba(244,168,37,.4);
+}
+.btn-primary:hover{transform:scale(1.05) translateY(-2px);box-shadow:0 12px 48px rgba(244,168,37,.6)}
+.btn-primary::after{
+  content:'';position:absolute;top:-50%;left:-60%;
+  width:40%;height:200%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);
+  transform:skewX(-20deg);
+  animation:btnShine 3s ease-in-out infinite;
+}
+@keyframes btnShine{0%,100%{left:-60%}50%{left:130%}}
+.btn-secondary{
+  padding:.85rem 2rem;border-radius:99px;font-size:.9rem;font-weight:600;
+  background:rgba(255,255,255,.06);color:rgba(255,255,255,.8);
+  border:1px solid rgba(255,255,255,.15);letter-spacing:.05em;text-transform:uppercase;
+  transition:all .3s;backdrop-filter:blur(8px);
+}
+.btn-secondary:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.3);transform:translateY(-2px)}
 
-    .hero-subtitle {
-      font-size: clamp(1rem, 2.5vw, 1.4rem);
-      color: rgba(255,255,255,0.75);
-      max-width: 600px;
-      margin: 1.5rem auto 2.5rem;
-      line-height: 1.7;
-      font-weight: 300;
-    }
-    .hero-subtitle span { color: #f4c430; font-weight: 600; }
-    .hero-subtitle span.green { color: #7cb942; }
+/* SCROLL HINT */
+.scroll-hint{
+  position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:.4rem;
+  opacity:.3;animation:scrollBounce 2s ease-in-out infinite;
+}
+@keyframes scrollBounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+.scroll-hint span{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase}
 
-    .hero-dates {
-      display: flex; gap: 1.5rem; justify-content: center;
-      flex-wrap: wrap; margin-bottom: 3rem;
-    }
-    .date-card {
-      padding: 1rem 1.8rem;
-      border-radius: 16px;
-      text-align: center;
-      position: relative; overflow: hidden;
-      animation: dateCardFloat 3s ease-in-out infinite alternate;
-      cursor: default;
-      transition: transform 0.3s;
-    }
-    .date-card:hover { transform: scale(1.05) translateY(-4px); }
-    .date-card.gold {
-      background: linear-gradient(135deg, rgba(244,168,37,0.15), rgba(244,168,37,0.05));
-      border: 1px solid rgba(244,168,37,0.4);
-    }
-    .date-card.green-card {
-      background: linear-gradient(135deg, rgba(46,139,87,0.15), rgba(46,139,87,0.05));
-      border: 1px solid rgba(46,139,87,0.4);
-      animation-delay: 0.5s;
-    }
-    @keyframes dateCardFloat {
-      from { transform: translateY(0); }
-      to   { transform: translateY(-8px); }
-    }
-    .date-card .icon { font-size: 2rem; margin-bottom: 0.4rem; }
-    .date-card .label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; }
-    .date-card .date-text { font-size: 1.1rem; font-weight: 700; margin: 0.2rem 0; }
-    .date-card.gold .date-text { color: #f4c430; }
-    .date-card.green-card .date-text { color: #7cb942; }
-    .date-card .loc { font-size: 0.8rem; opacity: 0.5; }
+/* ==============================
+   SECTION WRAPPER
+============================== */
+.section{padding:5rem 1.5rem;position:relative;z-index:10}
+.section-inner{max-width:1100px;margin:0 auto}
+.sec-header{text-align:center;margin-bottom:3.5rem}
+.sec-eyebrow{
+  font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;
+  color:rgba(255,255,255,.35);margin-bottom:.6rem;
+}
+.sec-title{
+  font-family:'Cinzel Decorative',serif;
+  font-size:clamp(1.4rem,4vw,2.2rem);font-weight:900;line-height:1.2;
+}
+.sec-title.gold-text{
+  background:linear-gradient(135deg,var(--gold3),var(--gold),var(--gold2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.sec-title.green-text{
+  background:linear-gradient(135deg,var(--green3),var(--green2),var(--green));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.sec-divider{
+  display:flex;align-items:center;justify-content:center;gap:1rem;margin:1rem auto;
+}
+.sd-line{height:1px;width:60px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2))}
+.sd-line.r{background:linear-gradient(90deg,rgba(255,255,255,.2),transparent)}
+.sd-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold)}
 
-    .scroll-hint {
-      position: absolute; bottom: 2rem; left: 50%;
-      transform: translateX(-50%);
-      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-      opacity: 0.5; animation: bounce 2s ease-in-out infinite;
-      font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
-    }
-    @keyframes bounce {
-      0%,100% { transform: translateX(-50%) translateY(0); }
-      50%      { transform: translateX(-50%) translateY(8px); }
-    }
+/* ==============================
+   COUNTDOWN
+============================== */
+.countdown-wrap{max-width:700px;margin:0 auto}
+.cd-toggle{display:flex;gap:.75rem;justify-content:center;margin-bottom:2rem;flex-wrap:wrap}
+.cd-btn{
+  padding:.5rem 1.4rem;border-radius:99px;font-size:.82rem;font-weight:600;
+  border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.45);
+  background:rgba(255,255,255,.04);transition:all .3s;
+}
+.cd-btn.active-gold{border-color:var(--gold);background:rgba(244,196,48,.12);color:var(--gold);box-shadow:0 0 20px rgba(244,196,48,.15)}
+.cd-btn.active-green{border-color:var(--green2);background:rgba(124,185,66,.12);color:var(--green2);box-shadow:0 0 20px rgba(124,185,66,.15)}
+.cd-btn:hover:not(.active-gold):not(.active-green){border-color:rgba(255,255,255,.3);color:rgba(255,255,255,.7)}
 
-    /* ===== COUNTDOWN ===== */
-    .countdown-section {
-      padding: 5rem 2rem;
-      text-align: center;
-      position: relative;
-    }
-    .countdown-section::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(to right, transparent, #f4a825, #2e8b57, transparent);
-    }
-    .section-title {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: clamp(1.5rem, 4vw, 2.5rem);
-      margin-bottom: 0.5rem;
-    }
-    .section-sub {
-      font-size: 0.9rem; color: rgba(255,255,255,0.5);
-      margin-bottom: 3rem; text-transform: uppercase; letter-spacing: 0.15em;
-    }
+/* FLIP CARDS */
+.cd-display{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.flip-card{perspective:400px}
+.flip-inner{
+  width:90px;padding:1.5rem .5rem;
+  background:var(--glass2);
+  border:1px solid var(--border);
+  border-radius:16px;text-align:center;
+  position:relative;overflow:hidden;
+  transition:transform .3s,box-shadow .3s;
+  box-shadow:0 8px 32px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.06);
+}
+.flip-inner::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:16px 16px 0 0;
+  background:linear-gradient(90deg,var(--gold),var(--gold3));
+  transition:background .4s;
+}
+.flip-inner.green::before{background:linear-gradient(90deg,var(--green),var(--green2))}
+.flip-inner:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.4)}
+.flip-num{
+  font-size:2.6rem;font-weight:900;line-height:1;
+  transition:all .3s;
+}
+.flip-num.gold{color:var(--gold)}
+.flip-num.green{color:var(--green2)}
+.flip-lbl{font-size:.65rem;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.35);margin-top:.4rem}
+.cd-expired{
+  text-align:center;font-size:1.3rem;font-weight:700;color:var(--gold);
+  padding:2rem;border-radius:20px;
+  background:rgba(244,196,48,.08);border:1px solid rgba(244,196,48,.2);
+  animation:expiredPulse 1.5s ease-in-out infinite;
+}
+@keyframes expiredPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.02)}}
 
-    .countdown-tabs {
-      display: flex; justify-content: center; gap: 1rem;
-      margin-bottom: 2rem; flex-wrap: wrap;
-    }
-    .countdown-tab {
-      padding: 0.5rem 1.5rem; border-radius: 99px;
-      border: 1px solid rgba(255,255,255,0.2);
-      cursor: pointer; font-size: 0.85rem;
-      transition: all 0.3s; background: transparent; color: #fff;
-      font-family: 'Poppins', sans-serif;
-    }
-    .countdown-tab.active.gold { border-color: #f4a825; background: rgba(244,168,37,0.15); color: #f4c430; }
-    .countdown-tab.active.green { border-color: #2e8b57; background: rgba(46,139,87,0.15); color: #7cb942; }
-    .countdown-tab:hover { border-color: rgba(255,255,255,0.4); }
+/* ==============================
+   INFO CARDS
+============================== */
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.ic{
+  padding:2rem;border-radius:24px;position:relative;overflow:hidden;
+  transition:transform .4s cubic-bezier(.34,1.56,.64,1),box-shadow .4s;
+  cursor:default;
+}
+.ic:hover{transform:translateY(-10px) scale(1.01)}
+.ic-raya{
+  background:linear-gradient(145deg,rgba(244,168,37,.12) 0%,rgba(20,10,2,.5) 100%);
+  border:1px solid rgba(244,168,37,.25);
+}
+.ic-raya:hover{box-shadow:0 24px 80px rgba(244,168,37,.2)}
+.ic-kaamatan{
+  background:linear-gradient(145deg,rgba(46,139,87,.12) 0%,rgba(2,20,10,.5) 100%);
+  border:1px solid rgba(46,139,87,.25);
+}
+.ic-kaamatan:hover{box-shadow:0 24px 80px rgba(46,139,87,.2)}
+.ic-unity{
+  background:linear-gradient(145deg,rgba(155,89,182,.12) 0%,rgba(10,5,20,.5) 100%);
+  border:1px solid rgba(155,89,182,.25);
+}
+.ic-unity:hover{box-shadow:0 24px 80px rgba(155,89,182,.2)}
+.ic-shine{
+  position:absolute;top:-100%;left:-100%;
+  width:80%;height:80%;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.04),transparent);
+  transition:all .6s;pointer-events:none;
+}
+.ic:hover .ic-shine{top:-10%;left:-10%}
+.ic-emoji{font-size:3rem;margin-bottom:1rem;display:block;animation:emojiFloat 3s ease-in-out infinite alternate}
+@keyframes emojiFloat{from{transform:translateY(0) rotate(-3deg)}to{transform:translateY(-8px) rotate(3deg)}}
+.ic-title{
+  font-family:'Cinzel Decorative',serif;font-size:1.2rem;font-weight:700;margin-bottom:.8rem;
+}
+.ic-raya .ic-title{color:var(--gold)}
+.ic-kaamatan .ic-title{color:var(--green2)}
+.ic-unity .ic-title{color:#c39adf}
+.ic-text{font-size:.85rem;color:rgba(255,255,255,.6);line-height:1.8}
+.ic-list{list-style:none;margin-top:1rem}
+.ic-list li{
+  font-size:.82rem;color:rgba(255,255,255,.55);padding:.28rem 0;
+  display:flex;align-items:center;gap:.6rem;
+}
+.ic-list li::before{content:'◆';font-size:.5rem}
+.ic-raya .ic-list li::before{color:var(--gold)}
+.ic-kaamatan .ic-list li::before{color:var(--green2)}
+.ic-unity .ic-list li::before{color:#c39adf}
 
-    .countdown-display {
-      display: flex; gap: 1.5rem; justify-content: center;
-      flex-wrap: wrap;
-    }
-    .count-box {
-      width: 110px; padding: 1.5rem 1rem;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      position: relative; overflow: hidden;
-      transition: transform 0.3s;
-    }
-    .count-box:hover { transform: translateY(-4px); }
-    .count-box::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 2px;
-    }
-    .count-box.gold::before { background: linear-gradient(to right, #f4a825, #ffe066); }
-    .count-box.green::before { background: linear-gradient(to right, #2e8b57, #7cb942); }
-    .count-num {
-      font-size: 2.8rem; font-weight: 900; line-height: 1;
-      animation: countFlip 0.3s ease-in-out;
-    }
-    .count-box.gold .count-num { color: #f4c430; }
-    .count-box.green .count-num { color: #7cb942; }
-    @keyframes countFlip {
-      from { transform: rotateX(90deg); opacity: 0; }
-      to   { transform: rotateX(0deg); opacity: 1; }
-    }
-    .count-label {
-      font-size: 0.7rem; text-transform: uppercase;
-      letter-spacing: 0.1em; color: rgba(255,255,255,0.4);
-      margin-top: 0.4rem;
-    }
-    .countdown-expired {
-      font-size: 1.5rem; color: #f4c430;
-      animation: celebratePulse 1s ease-in-out infinite;
-    }
-    @keyframes celebratePulse {
-      0%,100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
+/* ==============================
+   MUSIC PLAYER (PREMIUM)
+============================== */
+.music-section{
+  background:linear-gradient(180deg,transparent 0%,rgba(10,0,25,.7) 20%,rgba(10,0,25,.7) 80%,transparent 100%);
+  position:relative;
+}
+.music-section::before,.music-section::after{
+  content:'';position:absolute;left:5%;right:5%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(244,196,48,.2),rgba(46,139,87,.2),transparent);
+}
+.music-section::before{top:0}
+.music-section::after{bottom:0}
 
-    /* ===== ABOUT SECTION ===== */
-    .about-section {
-      padding: 5rem 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .cards-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem; margin-top: 3rem;
-    }
-    .info-card {
-      padding: 2rem;
-      border-radius: 20px;
-      position: relative; overflow: hidden;
-      transition: transform 0.4s, box-shadow 0.4s;
-      cursor: default;
-    }
-    .info-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-    }
-    .info-card.kaamatan {
-      background: linear-gradient(135deg, rgba(46,139,87,0.15) 0%, rgba(20,60,20,0.3) 100%);
-      border: 1px solid rgba(46,139,87,0.3);
-    }
-    .info-card.aidiladha {
-      background: linear-gradient(135deg, rgba(244,168,37,0.15) 0%, rgba(60,40,10,0.3) 100%);
-      border: 1px solid rgba(244,168,37,0.3);
-    }
-    .info-card.unity {
-      background: linear-gradient(135deg, rgba(100,50,150,0.15) 0%, rgba(20,10,40,0.3) 100%);
-      border: 1px solid rgba(150,100,200,0.3);
-    }
-    .card-glow {
-      position: absolute; top: -50%; left: -50%;
-      width: 200%; height: 200%;
-      border-radius: 50%;
-      opacity: 0; transition: opacity 0.4s;
-      pointer-events: none;
-    }
-    .info-card:hover .card-glow { opacity: 1; }
-    .info-card.kaamatan .card-glow { background: radial-gradient(circle, rgba(46,139,87,0.1) 0%, transparent 70%); }
-    .info-card.aidiladha .card-glow { background: radial-gradient(circle, rgba(244,168,37,0.1) 0%, transparent 70%); }
-    .info-card.unity .card-glow { background: radial-gradient(circle, rgba(150,100,200,0.1) 0%, transparent 70%); }
+.player-layout{
+  display:grid;
+  grid-template-columns:280px 1fr;
+  gap:1.5rem;
+  align-items:start;
+  max-width:1000px;margin:0 auto;
+}
+@media(max-width:760px){.player-layout{grid-template-columns:1fr}}
 
-    .card-icon { font-size: 3rem; margin-bottom: 1rem; display: block; animation: cardIconFloat 3s ease-in-out infinite alternate; }
-    @keyframes cardIconFloat {
-      from { transform: translateY(0) rotate(-3deg); }
-      to   { transform: translateY(-6px) rotate(3deg); }
-    }
-    .card-title {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: 1.3rem; font-weight: 700;
-      margin-bottom: 0.8rem;
-    }
-    .info-card.kaamatan .card-title { color: #7cb942; }
-    .info-card.aidiladha .card-title { color: #f4c430; }
-    .info-card.unity .card-title { color: #b48adf; }
-    .card-desc { font-size: 0.9rem; color: rgba(255,255,255,0.65); line-height: 1.8; }
-    .card-list { list-style: none; margin-top: 1rem; }
-    .card-list li {
-      padding: 0.3rem 0; font-size: 0.85rem; color: rgba(255,255,255,0.6);
-      display: flex; align-items: center; gap: 0.5rem;
-    }
-    .card-list li::before { content: '✦'; font-size: 0.6rem; opacity: 0.7; }
-    .info-card.kaamatan .card-list li::before { color: #7cb942; }
-    .info-card.aidiladha .card-list li::before { color: #f4c430; }
-    .info-card.unity .card-list li::before { color: #b48adf; }
+/* PLAYLIST */
+.playlist{
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--border);
+  border-radius:20px;overflow:hidden;
+}
+.pl-header{
+  padding:1rem 1.2rem;border-bottom:1px solid var(--border);
+  font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.12em;
+  color:rgba(255,255,255,.4);display:flex;align-items:center;gap:.5rem;
+}
+.pl-track{
+  padding:.9rem 1.2rem;display:flex;align-items:center;gap:.9rem;
+  cursor:pointer;transition:background .25s;border-bottom:1px solid var(--border);
+  position:relative;overflow:hidden;
+}
+.pl-track:last-child{border-bottom:none}
+.pl-track:hover,.pl-track.active{background:rgba(255,255,255,.06)}
+.pl-track.active::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(var(--gold),var(--green));
+}
+.pl-num{
+  width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;font-weight:700;flex-shrink:0;
+  background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);transition:all .3s;
+}
+.pl-track.active .pl-num{background:var(--gold);color:#000;animation:numPulse 1.5s ease-in-out infinite}
+@keyframes numPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+.pl-info{flex:1;min-width:0}
+.pl-title{font-size:.82rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.4}
+.pl-sub{font-size:.68rem;color:rgba(255,255,255,.35);margin-top:.1rem}
+.pl-badge{
+  font-size:.6rem;padding:.1rem .4rem;border-radius:4px;flex-shrink:0;font-weight:700;
+}
+.badge-raya{background:rgba(244,168,37,.2);color:var(--gold);border:1px solid rgba(244,168,37,.3)}
+.badge-dusun{background:rgba(46,139,87,.2);color:var(--green2);border:1px solid rgba(46,139,87,.3)}
 
-    /* ===== MUSIC SECTION ===== */
-    .music-section {
-      padding: 5rem 2rem;
-      background: linear-gradient(180deg, transparent 0%, rgba(10,5,25,0.6) 30%, rgba(10,5,25,0.6) 70%, transparent 100%);
-      position: relative;
-    }
-    .music-section::before, .music-section::after {
-      content: '';
-      position: absolute; left: 10%; right: 10%; height: 1px;
-      background: linear-gradient(to right, transparent, rgba(244,168,37,0.3), rgba(46,139,87,0.3), transparent);
-    }
-    .music-section::before { top: 0; }
-    .music-section::after { bottom: 0; }
+/* VIDEO */
+.video-wrap{border-radius:20px;overflow:hidden;position:relative}
+.video-ratio{position:relative;width:100%;padding-top:56.25%;border-radius:20px;overflow:hidden;border:1px solid var(--border)}
+.video-ratio iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+.video-caption{
+  margin-top:1rem;padding:1rem 1.2rem;
+  background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:14px;
+}
+.vc-title{font-size:.9rem;font-weight:600;color:var(--gold);margin-bottom:.3rem}
+.vc-desc{font-size:.75rem;color:rgba(255,255,255,.35);line-height:1.6}
+.eq-bars{display:flex;gap:2px;align-items:flex-end;height:16px;margin-left:auto}
+.eq-bar{
+  width:3px;background:var(--gold);border-radius:2px;
+  animation:eqAnim .8s ease-in-out infinite alternate;
+}
+.eq-bar:nth-child(2){animation-delay:.15s;height:60%}
+.eq-bar:nth-child(3){animation-delay:.3s;height:100%}
+.eq-bar:nth-child(4){animation-delay:.45s;height:40%}
+.eq-bar:nth-child(5){animation-delay:.6s;height:80%}
+@keyframes eqAnim{from{transform:scaleY(.2)}to{transform:scaleY(1)}}
 
-    .music-header { text-align: center; margin-bottom: 3rem; }
-    .music-subtitle {
-      font-size: 0.85rem; color: rgba(255,255,255,0.45);
-      text-transform: uppercase; letter-spacing: 0.2em; margin-top: 0.5rem;
-    }
+/* ==============================
+   GREETINGS CARDS
+============================== */
+.greetings-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem}
+.gc{
+  border-radius:24px;overflow:hidden;position:relative;
+  cursor:default;transition:transform .4s cubic-bezier(.34,1.56,.64,1);
+}
+.gc:hover{transform:translateY(-8px) rotateX(2deg)}
+.gc-bg{
+  padding:2.5rem 1.8rem;
+  position:relative;min-height:320px;
+  display:flex;flex-direction:column;align-items:center;justify-content:space-between;
+  text-align:center;
+}
+/* Raya Card */
+.gc-raya .gc-bg{
+  background:linear-gradient(145deg,#1a0a00 0%,#2d1500 50%,#180800 100%);
+  border:1px solid rgba(244,168,37,.3);
+}
+/* Kaamatan Card */
+.gc-kaamatan .gc-bg{
+  background:linear-gradient(145deg,#00100a 0%,#012010 50%,#001508 100%);
+  border:1px solid rgba(46,139,87,.3);
+}
+/* Unity Card */
+.gc-unity .gc-bg{
+  background:linear-gradient(145deg,#0a0020 0%,#150035 50%,#08001a 100%);
+  border:1px solid rgba(155,89,182,.3);
+}
 
-    .music-player-wrap {
-      max-width: 900px; margin: 0 auto;
-    }
-    .video-tabs {
-      display: flex; gap: 0.75rem; margin-bottom: 1.5rem;
-      flex-wrap: wrap; justify-content: center;
-    }
-    .video-tab-btn {
-      padding: 0.5rem 1.2rem;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.15);
-      background: rgba(255,255,255,0.04);
-      color: rgba(255,255,255,0.6);
-      cursor: pointer; font-size: 0.82rem;
-      transition: all 0.3s;
-      font-family: 'Poppins', sans-serif;
-    }
-    .video-tab-btn.active, .video-tab-btn:hover {
-      border-color: #f4a825;
-      background: rgba(244,168,37,0.12);
-      color: #f4c430;
-    }
-    .video-frame-wrap {
-      position: relative; width: 100%; padding-top: 56.25%;
-      border-radius: 20px; overflow: hidden;
-      border: 1px solid rgba(244,168,37,0.2);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-    }
-    .video-frame-wrap iframe {
-      position: absolute; top: 0; left: 0;
-      width: 100%; height: 100%;
-      border: none;
-    }
-    .video-info {
-      margin-top: 1.2rem; text-align: center;
-      padding: 1rem 1.5rem;
-      background: rgba(255,255,255,0.04);
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.06);
-    }
-    .video-info .vi-title { font-weight: 600; font-size: 1rem; color: #f4c430; }
-    .video-info .vi-desc { font-size: 0.8rem; color: rgba(255,255,255,0.4); margin-top: 0.3rem; }
+/* Card top glow accent */
+.gc::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;z-index:1;border-radius:24px 24px 0 0;
+}
+.gc-raya::before{background:linear-gradient(90deg,transparent,var(--gold),var(--gold2),transparent)}
+.gc-kaamatan::before{background:linear-gradient(90deg,transparent,var(--green),var(--green2),transparent)}
+.gc-unity::before{background:linear-gradient(90deg,transparent,var(--purple),#c39adf,transparent)}
 
-    /* ===== GALLERY / ICONS SECTION ===== */
-    .icons-section {
-      padding: 5rem 2rem;
-      text-align: center;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    .icons-row {
-      display: flex; flex-wrap: wrap;
-      justify-content: center; gap: 1.5rem;
-      margin-top: 3rem;
-    }
-    .icon-item {
-      display: flex; flex-direction: column; align-items: center;
-      gap: 0.6rem; cursor: default;
-      transition: transform 0.3s;
-    }
-    .icon-item:hover { transform: scale(1.2) translateY(-4px); }
-    .icon-bubble {
-      width: 80px; height: 80px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 2.2rem;
-      position: relative;
-      animation: iconFloat 3s ease-in-out infinite alternate;
-    }
-    @keyframes iconFloat {
-      from { transform: translateY(0); }
-      to   { transform: translateY(-8px); }
-    }
-    .icon-bubble.gold-bg {
-      background: radial-gradient(circle, rgba(244,168,37,0.25), rgba(244,168,37,0.05));
-      border: 1px solid rgba(244,168,37,0.3);
-      box-shadow: 0 0 20px rgba(244,168,37,0.15);
-    }
-    .icon-bubble.green-bg {
-      background: radial-gradient(circle, rgba(46,139,87,0.25), rgba(46,139,87,0.05));
-      border: 1px solid rgba(46,139,87,0.3);
-      box-shadow: 0 0 20px rgba(46,139,87,0.15);
-    }
-    .icon-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); text-align: center; max-width: 80px; }
+/* Animated corner ornaments */
+.gc-corner{position:absolute;font-size:1.1rem;opacity:.25;animation:cornerFloat 4s ease-in-out infinite alternate}
+.gc-corner.tl{top:.8rem;left:.8rem;animation-delay:0s}
+.gc-corner.tr{top:.8rem;right:.8rem;animation-delay:1s}
+.gc-corner.bl{bottom:.8rem;left:.8rem;animation-delay:2s}
+.gc-corner.br{bottom:.8rem;right:.8rem;animation-delay:3s}
+@keyframes cornerFloat{from{transform:scale(1) rotate(0)}to{transform:scale(1.3) rotate(15deg)}}
 
-    /* ===== SUMAZAU DANCE ANIMATION ===== */
-    .dance-section {
-      padding: 5rem 2rem;
-      text-align: center;
-      position: relative;
-    }
-    .dance-stage {
-      display: flex; justify-content: center; align-items: flex-end;
-      gap: 1rem; margin: 3rem auto;
-      max-width: 600px; height: 180px;
-      position: relative;
-    }
-    .dancer {
-      display: flex; flex-direction: column; align-items: center;
-      gap: 2px;
-    }
-    .dancer-head {
-      width: 28px; height: 28px; border-radius: 50%;
-      background: linear-gradient(135deg, #f4c430, #e8952a);
-      animation: dancerBob 1s ease-in-out infinite alternate;
-    }
-    .dancer-body {
-      width: 22px; height: 50px; border-radius: 6px;
-      position: relative;
-    }
-    .dancer-1 .dancer-body { background: linear-gradient(135deg, #2e8b57, #7cb942); }
-    .dancer-2 .dancer-body { background: linear-gradient(135deg, #f4a825, #ffe066); }
-    .dancer-3 .dancer-body { background: linear-gradient(135deg, #2e8b57, #7cb942); }
-    .dancer-arm-l, .dancer-arm-r {
-      position: absolute; top: 8px;
-      width: 32px; height: 8px; border-radius: 4px;
-      transform-origin: right center;
-    }
-    .dancer-1 .dancer-arm-l, .dancer-1 .dancer-arm-r { background: #2e8b57; }
-    .dancer-2 .dancer-arm-l, .dancer-2 .dancer-arm-r { background: #f4a825; }
-    .dancer-3 .dancer-arm-l, .dancer-3 .dancer-arm-r { background: #2e8b57; }
-    .dancer-arm-l { right: 100%; transform: rotate(-30deg); animation: armSwingL 0.5s ease-in-out infinite alternate; }
-    .dancer-arm-r { left: 100%; transform: rotate(30deg); animation: armSwingR 0.5s ease-in-out infinite alternate; }
-    .dancer-2 .dancer-arm-l { animation-delay: 0.25s; }
-    .dancer-2 .dancer-arm-r { animation-delay: 0.25s; }
-    .dancer-3 .dancer-arm-l { animation-delay: 0.5s; }
-    .dancer-3 .dancer-arm-r { animation-delay: 0.5s; }
-    @keyframes armSwingL {
-      from { transform: rotate(-60deg); }
-      to   { transform: rotate(-10deg); }
-    }
-    @keyframes armSwingR {
-      from { transform: rotate(10deg); }
-      to   { transform: rotate(60deg); }
-    }
-    .dancer-legs { display: flex; gap: 4px; margin-top: 2px; }
-    .dancer-leg {
-      width: 9px; height: 40px; border-radius: 4px;
-      transform-origin: top center;
-    }
-    .dancer-1 .dancer-leg { background: #1a5c33; animation: legSwing 1s ease-in-out infinite alternate; }
-    .dancer-2 .dancer-leg { background: #c8850e; animation: legSwing 1s ease-in-out infinite alternate; animation-delay: 0.25s; }
-    .dancer-3 .dancer-leg { background: #1a5c33; animation: legSwing 1s ease-in-out infinite alternate; animation-delay: 0.5s; }
-    .dancer-leg:nth-child(2) { animation-direction: alternate-reverse !important; }
-    @keyframes legSwing {
-      from { transform: rotate(-15deg); }
-      to   { transform: rotate(15deg); }
-    }
-    @keyframes dancerBob {
-      from { transform: translateY(0); }
-      to   { transform: translateY(-6px); }
-    }
-    .dancer-2 .dancer-head { animation-delay: 0.25s; }
-    .dancer-3 .dancer-head { animation-delay: 0.5s; }
-    .dancer-2 { animation-delay: 0.25s; }
-    .dancer-3 { animation-delay: 0.5s; }
-    .stage-floor {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      height: 4px; border-radius: 2px;
-      background: linear-gradient(to right, #2e8b57, #f4a825, #2e8b57);
-      box-shadow: 0 0 20px rgba(244,168,37,0.4);
-    }
-    .dance-note {
-      position: absolute; font-size: 1.5rem;
-      animation: noteFloat 2s ease-in-out infinite;
-      opacity: 0;
-    }
-    .dance-note:nth-child(1) { top: 0; left: 15%; animation-delay: 0s; }
-    .dance-note:nth-child(2) { top: 10%; left: 75%; animation-delay: 0.7s; }
-    .dance-note:nth-child(3) { top: 5%; left: 45%; animation-delay: 1.4s; }
-    @keyframes noteFloat {
-      0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
-      20%  { opacity: 1; }
-      100% { transform: translateY(-80px) rotate(20deg); opacity: 0; }
-    }
-    .dance-label {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: 1.1rem; color: #7cb942;
-      margin-top: 1rem;
-    }
+.gc-icon{font-size:3.5rem;animation:gcIconAnim 3s ease-in-out infinite alternate;margin-bottom:.5rem}
+@keyframes gcIconAnim{from{transform:translateY(0) scale(1)}to{transform:translateY(-8px) scale(1.08)}}
+.gc-main{
+  font-family:'Cinzel Decorative',serif;
+  font-size:clamp(1.2rem,4vw,1.6rem);font-weight:900;line-height:1.2;
+  margin:.5rem 0;
+}
+.gc-raya .gc-main{color:var(--gold)}
+.gc-kaamatan .gc-main{color:var(--green2)}
+.gc-unity .gc-main{
+  background:linear-gradient(135deg,var(--gold),var(--green2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.gc-arabic{
+  font-family:'Amiri',serif;font-size:1.4rem;color:rgba(244,196,48,.7);
+  line-height:1.6;direction:rtl;margin:.4rem 0;
+}
+.gc-meaning{font-size:.75rem;color:rgba(255,255,255,.35);font-style:italic;margin-bottom:.6rem}
+.gc-msg{font-size:.82rem;color:rgba(255,255,255,.6);line-height:1.8;flex:1;padding:.5rem 0}
 
-    /* ===== GREETINGS SECTION ===== */
-    .greetings-section {
-      padding: 5rem 2rem;
-      text-align: center;
-      position: relative;
-    }
-    .greetings-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem; max-width: 1000px; margin: 3rem auto 0;
-    }
-    .greeting-card {
-      padding: 2rem 1.5rem;
-      border-radius: 20px;
-      position: relative; overflow: hidden;
-      animation: greetFloat 4s ease-in-out infinite alternate;
-      cursor: default;
-    }
-    .greeting-card:nth-child(2) { animation-delay: 1s; }
-    .greeting-card:nth-child(3) { animation-delay: 2s; }
-    @keyframes greetFloat {
-      from { transform: translateY(0); }
-      to   { transform: translateY(-10px); }
-    }
-    .greeting-card.g-kaamatan {
-      background: linear-gradient(135deg, rgba(46,139,87,0.2), rgba(10,40,20,0.4));
-      border: 1px solid rgba(46,139,87,0.4);
-    }
-    .greeting-card.g-aidiladha {
-      background: linear-gradient(135deg, rgba(244,168,37,0.2), rgba(40,30,5,0.4));
-      border: 1px solid rgba(244,168,37,0.4);
-    }
-    .greeting-card.g-unity {
-      background: linear-gradient(135deg, rgba(100,50,200,0.2), rgba(20,10,40,0.4));
-      border: 1px solid rgba(150,80,220,0.4);
-    }
-    .greeting-big {
-      font-size: clamp(1.8rem, 5vw, 2.5rem);
-      font-weight: 900; line-height: 1.2;
-      margin-bottom: 0.5rem;
-    }
-    .greeting-card.g-kaamatan .greeting-big { color: #7cb942; }
-    .greeting-card.g-aidiladha .greeting-big { color: #f4c430; }
-    .greeting-card.g-unity .greeting-big {
-      background: linear-gradient(135deg, #f4c430, #7cb942);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
-    .greeting-meaning { font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-bottom: 1rem; font-style: italic; }
-    .greeting-text { font-size: 0.95rem; color: rgba(255,255,255,0.7); line-height: 1.7; }
-    .greeting-emoji { font-size: 2.5rem; margin-bottom: 0.8rem; }
+/* Glow ripple */
+.gc-glow{
+  position:absolute;bottom:-40%;left:50%;transform:translateX(-50%);
+  width:150%;height:150%;border-radius:50%;
+  opacity:.08;pointer-events:none;
+  animation:glowPulse 4s ease-in-out infinite alternate;
+}
+.gc-raya .gc-glow{background:radial-gradient(circle,var(--gold),transparent 70%)}
+.gc-kaamatan .gc-glow{background:radial-gradient(circle,var(--green),transparent 70%)}
+.gc-unity .gc-glow{background:radial-gradient(circle,var(--purple),transparent 70%)}
+@keyframes glowPulse{from{opacity:.05;transform:translateX(-50%) scale(.9)}to{opacity:.15;transform:translateX(-50%) scale(1.1)}}
 
-    /* ===== FOOTER ===== */
-    footer {
-      padding: 3rem 2rem;
-      text-align: center;
-      border-top: 1px solid rgba(255,255,255,0.05);
-      position: relative;
-    }
-    footer::before {
-      content: '';
-      position: absolute; top: 0; left: 20%; right: 20%;
-      height: 1px;
-      background: linear-gradient(to right, transparent, #f4a825, #2e8b57, transparent);
-    }
-    .footer-logo {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: 1.4rem;
-      background: linear-gradient(135deg, #f4c430, #7cb942);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-      margin-bottom: 0.8rem;
-    }
-    .footer-text { font-size: 0.82rem; color: rgba(255,255,255,0.3); line-height: 1.8; }
-    .footer-heart { color: #f4a825; animation: heartBeat 1.5s ease-in-out infinite; display: inline-block; }
-    @keyframes heartBeat {
-      0%,100% { transform: scale(1); }
-      25%      { transform: scale(1.3); }
-      50%      { transform: scale(1); }
-      75%      { transform: scale(1.2); }
-    }
-    .footer-flags { font-size: 2rem; margin: 1rem 0; letter-spacing: 0.5rem; }
+/* ==============================
+   FIREWORKS BUTTON + CTA
+============================== */
+.celebrate-wrap{text-align:center;padding:4rem 1.5rem 5rem;position:relative;z-index:10}
+.cel-label{font-size:.75rem;color:rgba(255,255,255,.3);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.5rem}
+.btn-celebrate{
+  padding:1.1rem 3rem;border-radius:99px;
+  background:linear-gradient(135deg,#ff6b00,#f4c430,#2e8b57,#f4c430,#ff6b00);
+  background-size:300% auto;
+  color:#fff;font-size:1rem;font-weight:900;
+  letter-spacing:.08em;text-transform:uppercase;
+  border:none;cursor:pointer;
+  animation:celebBtn 4s linear infinite;
+  transition:transform .3s,box-shadow .3s;
+  box-shadow:0 8px 40px rgba(244,196,48,.4);
+}
+@keyframes celebBtn{from{background-position:0% center}to{background-position:300% center}}
+.btn-celebrate:hover{transform:scale(1.08);box-shadow:0 16px 64px rgba(244,196,48,.6)}
+.btn-celebrate:active{transform:scale(.97)}
 
-    /* ===== CONFETTI ===== */
-    #confettiCanvas {
-      position: fixed; top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: 999; pointer-events: none;
-    }
+/* ==============================
+   FOOTER
+============================== */
+footer{
+  padding:3rem 1.5rem 5rem;text-align:center;
+  position:relative;z-index:10;
+  border-top:1px solid var(--border);
+}
+footer::after{
+  content:'';position:absolute;top:0;left:20%;right:20%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),var(--green),transparent);
+}
+.ft-logo{
+  font-family:'Cinzel Decorative',serif;font-size:1.2rem;
+  background:linear-gradient(135deg,var(--gold),var(--green));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:1rem;
+}
+.ft-text{font-size:.78rem;color:rgba(255,255,255,.3);line-height:2;margin-bottom:1rem}
+.ft-heart{color:var(--gold);display:inline-block;animation:heartbeat 1.5s ease-in-out infinite}
+@keyframes heartbeat{0%,100%{transform:scale(1)}25%{transform:scale(1.4)}50%{transform:scale(1)}75%{transform:scale(1.2)}}
+.ft-flags{font-size:2rem;letter-spacing:.5rem;margin:.5rem 0}
 
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 600px) {
-      .hero-dates { flex-direction: column; align-items: center; }
-      .countdown-display { gap: 0.8rem; }
-      .count-box { width: 75px; padding: 1rem 0.5rem; }
-      .count-num { font-size: 2rem; }
-      .dance-stage { height: 140px; }
-    }
+/* ==============================
+   REVEAL ANIMATIONS
+============================== */
+.reveal{opacity:0;transform:translateY(50px);transition:opacity .8s ease,transform .8s cubic-bezier(.34,1.56,.64,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-50px);transition:opacity .8s ease,transform .8s cubic-bezier(.34,1.56,.64,1)}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(50px);transition:opacity .8s ease,transform .8s cubic-bezier(.34,1.56,.64,1)}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
 
-    /* ===== REVEAL ANIMATION ===== */
-    .reveal {
-      opacity: 0; transform: translateY(40px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
+/* ==============================
+   MOBILE OVERRIDES
+============================== */
+@media(max-width:600px){
+  .hero{padding:5rem 1.2rem 6rem}
+  .db{padding:.7rem 1rem}
+  .db-icon{font-size:1.4rem}
+  .db-date{font-size:.85rem}
+  .flip-inner{width:70px;padding:1.1rem .3rem}
+  .flip-num{font-size:2rem}
+  .section{padding:3.5rem 1.2rem}
+  .info-grid{grid-template-columns:1fr}
+  .greetings-grid{grid-template-columns:1fr}
+  footer{padding-bottom:6rem}
+  .celebrate-wrap{padding-bottom:6rem}
+}
+@media(max-width:400px){
+  .cd-display{gap:.6rem}
+  .flip-inner{width:62px}
+  .flip-num{font-size:1.7rem}
+  .hero-year{letter-spacing:.05em}
+}
 
-    /* ===== NAV ===== */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 1rem 2rem;
-      display: flex; align-items: center; justify-content: space-between;
-      transition: background 0.4s, backdrop-filter 0.4s;
-    }
-    nav.scrolled {
-      background: rgba(10,10,26,0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .nav-brand {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: 1rem;
-      background: linear-gradient(135deg, #f4c430, #7cb942);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
-    .nav-links {
-      display: flex; gap: 1.5rem; list-style: none;
-    }
-    .nav-links a {
-      color: rgba(255,255,255,0.6); text-decoration: none;
-      font-size: 0.85rem; transition: color 0.3s;
-    }
-    .nav-links a:hover { color: #f4c430; }
-    @media (max-width: 500px) { .nav-links { display: none; } }
+/* ==============================
+   SPARKLE DOTS (CSS only)
+============================== */
+.sparkle-field{position:fixed;inset:0;z-index:2;pointer-events:none}
+.sp{
+  position:absolute;width:4px;height:4px;border-radius:50%;
+  animation:spAnim ease-in-out infinite alternate;
+}
+@keyframes spAnim{
+  0%{opacity:0;transform:scale(0)}
+  50%{opacity:1;transform:scale(1)}
+  100%{opacity:0;transform:scale(0)}
+}
 
-    /* ===== FIREWORK BTN ===== */
-    .celebrate-btn {
-      display: inline-block;
-      padding: 0.9rem 2.5rem;
-      border-radius: 99px;
-      background: linear-gradient(135deg, #f4a825, #2e8b57);
-      color: #fff; font-weight: 700; font-size: 1rem;
-      border: none; cursor: pointer;
-      transition: transform 0.3s, box-shadow 0.3s;
-      font-family: 'Poppins', sans-serif;
-      text-transform: uppercase; letter-spacing: 0.1em;
-      position: relative; overflow: hidden;
-    }
-    .celebrate-btn::before {
-      content: '';
-      position: absolute; top: 50%; left: 50%;
-      width: 0; height: 0;
-      background: rgba(255,255,255,0.2);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      transition: width 0.5s, height 0.5s;
-    }
-    .celebrate-btn:hover::before { width: 300px; height: 300px; }
-    .celebrate-btn:hover { transform: scale(1.05); box-shadow: 0 10px 40px rgba(244,168,37,0.4); }
-    .celebrate-btn:active { transform: scale(0.98); }
-  </style>
+/* ==============================
+   MOSQUE SILHOUETTE (decorative)
+============================== */
+.mosque-wrap{
+  position:fixed;bottom:0;left:50%;transform:translateX(-50%);
+  z-index:2;pointer-events:none;opacity:.06;
+  width:min(600px,100%);
+}
+</style>
 </head>
 <body>
 
-<!-- ===== BACKGROUND CANVAS ===== -->
-<canvas id="bgCanvas"></canvas>
+<!-- AURORA BG -->
+<div id="aurora">
+  <div class="aurora-blob ab1"></div>
+  <div class="aurora-blob ab2"></div>
+  <div class="aurora-blob ab3"></div>
+  <div class="aurora-blob ab4"></div>
+</div>
 
-<!-- ===== CONFETTI CANVAS ===== -->
-<canvas id="confettiCanvas"></canvas>
+<!-- CANVASES -->
+<canvas id="particleCanvas"></canvas>
+<canvas id="fwCanvas"></canvas>
 
-<!-- ===== PARTICLES ===== -->
-<div class="particle-container" id="particles"></div>
+<!-- SPARKLES -->
+<div class="sparkle-field" id="sparkles"></div>
 
-<!-- ===== LANTERNS ===== -->
-<div class="lantern-container" id="lanterns"></div>
+<!-- FLOATERS -->
+<div class="floaters" id="floaters"></div>
 
-<!-- ===== STARS ===== -->
-<div class="star-field" id="stars"></div>
-
-<!-- ===== MOON ===== -->
-<div class="moon-crescent">
-  <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-    <defs>
-      <radialGradient id="moonGrad" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" stop-color="#ffe066"/>
-        <stop offset="100%" stop-color="#f4a825"/>
-      </radialGradient>
-    </defs>
-    <path d="M60 40C60 51.046 51.046 60 40 60C33.373 60 27.506 56.788 23.787 51.787C26.162 52.57 28.703 53 31.333 53C44.956 53 56 41.956 56 28.333C56 24.073 54.904 20.074 53.016 16.586C57.302 20.44 60 26.003 60 40Z" fill="url(#moonGrad)" opacity="0.95"/>
-    <circle cx="62" cy="18" r="4" fill="#ffe066" opacity="0.8"/>
-    <circle cx="70" cy="30" r="2.5" fill="#ffe066" opacity="0.6"/>
-    <circle cx="55" cy="10" r="2" fill="#fff" opacity="0.5"/>
+<!-- MOSQUE SILHOUETTE -->
+<div class="mosque-wrap">
+  <svg viewBox="0 0 600 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Main dome -->
+    <ellipse cx="300" cy="120" rx="80" ry="70" fill="white"/>
+    <rect x="220" y="120" width="160" height="80" fill="white"/>
+    <!-- Minaret L -->
+    <rect x="140" y="60" width="30" height="140" fill="white"/>
+    <ellipse cx="155" cy="60" rx="15" ry="20" fill="white"/>
+    <polygon points="155,25 145,60 165,60" fill="white"/>
+    <!-- Minaret R -->
+    <rect x="430" y="60" width="30" height="140" fill="white"/>
+    <ellipse cx="445" cy="60" rx="15" ry="20" fill="white"/>
+    <polygon points="445,25 435,60 455,60" fill="white"/>
+    <!-- Small domes -->
+    <ellipse cx="220" cy="120" rx="30" ry="25" fill="white"/>
+    <ellipse cx="380" cy="120" rx="30" ry="25" fill="white"/>
+    <!-- Crescent on top -->
+    <path d="M295 55 Q300 40 308 48 Q300 44 296 55Z" fill="white"/>
+    <circle cx="304" cy="44" r="4" fill="white"/>
   </svg>
 </div>
 
-<!-- ===== RICE STALKS ===== -->
-<div class="rice-container" id="riceStalks"></div>
-
-<!-- ===== NAV ===== -->
-<nav id="mainNav">
-  <div class="nav-brand">🌾 Sabah Bersatu 🌙</div>
-  <ul class="nav-links">
-    <li><a href="#about">Tentang</a></li>
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nb-brand">🌾 Sabah Bersatu 🌙</div>
+  <ul class="nb-links">
     <li><a href="#countdown">Countdown</a></li>
+    <li><a href="#about">Tentang</a></li>
     <li><a href="#music">Muzik</a></li>
-    <li><a href="#greetings">Ucapan</a></li>
+    <li><a href="#ucapan">Ucapan</a></li>
   </ul>
 </nav>
 
-<!-- ===== MAIN CONTENT ===== -->
-<main class="content">
+<!-- BOTTOM NAV (MOBILE) -->
+<nav class="bottom-nav">
+  <div class="bn-items">
+    <a href="#hero" class="bn-item active" id="bn0">
+      <span class="bn-icon">🏠</span><span>Utama</span>
+    </a>
+    <a href="#countdown" class="bn-item" id="bn1">
+      <span class="bn-icon">⏳</span><span>Countdown</span>
+    </a>
+    <a href="#music" class="bn-item" id="bn2">
+      <span class="bn-icon">🎵</span><span>Muzik</span>
+    </a>
+    <a href="#ucapan" class="bn-item" id="bn3">
+      <span class="bn-icon">💌</span><span>Ucapan</span>
+    </a>
+    <button class="bn-item" onclick="triggerMegaCelebration()">
+      <span class="bn-icon">🎆</span><span>Raya!</span>
+    </button>
+  </div>
+</nav>
 
-  <!-- HERO -->
-  <section class="hero" id="home">
-    <div class="hero-badge">
-      <span>🌾</span> Pesta Kaamatan & Hari Raya Aidiladha <span>🌙</span>
-    </div>
-    <div class="hero-title-wrap">
-      <div class="hero-title-top">Pesta Kaamatan</div>
-      <div class="hero-title-divider">
-        <div class="divider-line"></div>
-        <span class="divider-icon">✦</span>
-        <div class="divider-line right"></div>
-      </div>
-      <div class="hero-title-bottom">Hari Raya Aidiladha</div>
-    </div>
+<!-- ==================== MAIN ==================== -->
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-pill">✨ Mei 2026 — Bulan Perayaan Sabah ✨</div>
+
+  <div class="hero-main-title">
+    <span class="hmt-line1">Pesta Kaamatan</span>
+    <span class="hmt-x">✦</span>
+    <span class="hmt-line2">Hari Raya Aidiladha</span>
+  </div>
+
+  <div class="hero-year-wrap">
+    <span style="font-size:2rem;animation:dbFloat 2s ease-in-out infinite alternate">🌾</span>
     <div class="hero-year">2026</div>
-    <p class="hero-subtitle">
-      Dua perayaan agung dalam satu semangat.<br/>
-      <span>Tadau Kaamatan</span> — hari syukur menuai padi,<br/>
-      <span class="green">Aidiladha</span> — hari korban dan ketakwaan.<br/>
-      Bersatu dalam keharmonian <span>Sabah</span> yang kita cintai. 🤝
-    </p>
-    <div class="hero-dates">
-      <div class="date-card gold">
-        <div class="icon">🌙</div>
-        <div class="label">Hari Raya Aidiladha</div>
-        <div class="date-text">27 Mei 2026 / Rabu</div>
-        <div class="loc">10 Zulhijjah 1447H</div>
-      </div>
-      <div class="date-card green-card">
-        <div class="icon">🌾</div>
-        <div class="label">Pesta Kaamatan</div>
-        <div class="date-text">30–31 Mei 2026</div>
-        <div class="loc">Sabah, Malaysia</div>
-      </div>
-    </div>
-    <button class="celebrate-btn" onclick="triggerCelebration()">🎉 Rayakan Bersama!</button>
-    <div class="scroll-hint">
-      <span>Tatal Ke Bawah</span>
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <path d="M5 8L10 13L15 8" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-    </div>
-  </section>
+    <span style="font-size:2rem;animation:dbFloat 2s ease-in-out infinite alternate .5s">🌙</span>
+  </div>
 
-  <!-- COUNTDOWN -->
-  <section class="countdown-section reveal" id="countdown">
-    <div class="section-title">⏳ Kira Detik Perayaan</div>
-    <div class="section-sub">Berapa lama lagi? — How many days left?</div>
-    <div class="countdown-tabs">
-      <button class="countdown-tab active gold" onclick="switchCountdown('aidiladha', this)">🌙 Aidiladha — 27 Mei</button>
-      <button class="countdown-tab green" onclick="switchCountdown('kaamatan', this)">🌾 Kaamatan — 30 Mei</button>
-    </div>
-    <div class="countdown-display" id="countdownDisplay">
-      <div class="count-box gold">
-        <div class="count-num" id="days">--</div>
-        <div class="count-label">Hari</div>
-      </div>
-      <div class="count-box gold">
-        <div class="count-num" id="hours">--</div>
-        <div class="count-label">Jam</div>
-      </div>
-      <div class="count-box gold">
-        <div class="count-num" id="minutes">--</div>
-        <div class="count-label">Minit</div>
-      </div>
-      <div class="count-box gold">
-        <div class="count-num" id="seconds">--</div>
-        <div class="count-label">Saat</div>
-      </div>
-    </div>
-    <div id="expiredMsg" style="display:none" class="countdown-expired">
-      🎉 Selamat Menyambut Perayaan! Maaf Maal Kaamatan & Selamat Hari Raya! 🎊
-    </div>
-  </section>
+  <p class="hero-tagline">
+    Dua perayaan agung. Satu semangat. <strong>Sabah Bersatu.</strong><br/>
+    Tadau Kaamatan — pesta syukur tuaian padi bumi Borneo.<br/>
+    Aidiladha — hari korban dan <em>ketakwaan abadi.</em>
+  </p>
 
-  <!-- ABOUT -->
-  <section class="about-section reveal" id="about">
-    <div style="text-align:center">
-      <div class="section-title">🏡 Mengenali Perayaan</div>
-      <div class="section-sub">Tradisi, Makna & Keindahan</div>
+  <div class="date-badges">
+    <div class="db db-raya">
+      <span class="db-icon">🌙</span>
+      <div class="db-info">
+        <div class="db-label">Hari Raya Aidiladha</div>
+        <div class="db-date">27 Mei 2026 — Rabu</div>
+        <div class="db-sub">10 Zulhijjah 1447H</div>
+      </div>
     </div>
-    <div class="cards-grid">
-      <div class="info-card kaamatan">
-        <div class="card-glow"></div>
-        <span class="card-icon">🌾</span>
-        <div class="card-title">Pesta Kaamatan</div>
-        <p class="card-desc">Tadau Kaamatan atau Pesta Menuai adalah festival penuaian padi yang disambut oleh masyarakat Kadazandusun di Sabah pada setiap tahun.</p>
-        <ul class="card-list">
-          <li>Tarikh: 30–31 Mei setiap tahun</li>
+    <div class="db db-kaamatan">
+      <span class="db-icon">🌾</span>
+      <div class="db-info">
+        <div class="db-label">Pesta Kaamatan</div>
+        <div class="db-date">30–31 Mei 2026</div>
+        <div class="db-sub">Tadau Kaamatan, Sabah</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-cta">
+    <button class="btn-primary" onclick="triggerMegaCelebration()">🎆 Rayakan Bersama!</button>
+    <a href="#ucapan" class="btn-secondary">💌 Hantar Ucapan</a>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Tatal Ke Bawah</span>
+    <svg width="20" height="12" viewBox="0 0 20 12" fill="none">
+      <path d="M2 2L10 10L18 2" stroke="rgba(255,255,255,.5)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+</section>
+
+<!-- COUNTDOWN -->
+<section class="section reveal" id="countdown">
+  <div class="section-inner">
+    <div class="sec-header">
+      <div class="sec-eyebrow">⏳ Detik Menanti</div>
+      <div class="sec-title gold-text">Kira Detik Perayaan</div>
+      <div class="sec-divider">
+        <div class="sd-line"></div>
+        <div class="sd-dot"></div>
+        <div class="sd-line r"></div>
+      </div>
+    </div>
+    <div class="countdown-wrap">
+      <div class="cd-toggle">
+        <button class="cd-btn active-gold" id="cdBtn1" onclick="switchCD('aidiladha',this)">🌙 Aidiladha — 27 Mei</button>
+        <button class="cd-btn" id="cdBtn2" onclick="switchCD('kaamatan',this)">🌾 Kaamatan — 30 Mei</button>
+      </div>
+      <div class="cd-display" id="cdDisplay">
+        <div class="flip-card"><div class="flip-inner" id="fiDays"><div class="flip-num gold" id="cDays">--</div><div class="flip-lbl">Hari</div></div></div>
+        <div class="flip-card"><div class="flip-inner" id="fiHours"><div class="flip-num gold" id="cHours">--</div><div class="flip-lbl">Jam</div></div></div>
+        <div class="flip-card"><div class="flip-inner" id="fiMins"><div class="flip-num gold" id="cMins">--</div><div class="flip-lbl">Minit</div></div></div>
+        <div class="flip-card"><div class="flip-inner" id="fiSecs"><div class="flip-num gold" id="cSecs">--</div><div class="flip-lbl">Saat</div></div></div>
+      </div>
+      <div id="cdExpired" style="display:none" class="cd-expired">
+        🎉 SELAMAT MENYAMBUT! Kotobian Tadau Kaamatan & Selamat Hari Raya Aidiladha 2026! 🎊
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section reveal" id="about">
+  <div class="section-inner">
+    <div class="sec-header">
+      <div class="sec-eyebrow">🏡 Mengenali Perayaan</div>
+      <div class="sec-title">Tradisi &amp; <span style="color:var(--green2)">Makna</span></div>
+      <div class="sec-divider">
+        <div class="sd-line"></div>
+        <div class="sd-dot" style="background:var(--green2)"></div>
+        <div class="sd-line r"></div>
+      </div>
+    </div>
+    <div class="info-grid">
+      <div class="ic ic-raya reveal">
+        <div class="ic-shine"></div>
+        <span class="ic-emoji">🌙</span>
+        <div class="ic-title">Hari Raya Aidiladha</div>
+        <p class="ic-text">Hari Raya Korban — memperingati pengorbanan agung Nabi Ibrahim a.s. yang menjadi simbol keimanan, ketaatan, dan keikhlasan kepada Allah SWT.</p>
+        <ul class="ic-list">
+          <li>27 Mei 2026 / 10 Zulhijjah 1447H</li>
+          <li>Solat Aidiladha pagi hari</li>
+          <li>Ibadah korban (lembu, kambing, unta)</li>
+          <li>Musim Haji di Mekah al-Mukarramah</li>
+          <li>Takbir raya berkumandang</li>
+          <li>Rumah terbuka & bersilaturrahim</li>
+        </ul>
+      </div>
+      <div class="ic ic-kaamatan reveal" style="transition-delay:.15s">
+        <div class="ic-shine"></div>
+        <span class="ic-emoji">🌾</span>
+        <div class="ic-title">Pesta Kaamatan</div>
+        <p class="ic-text">Tadau Kaamatan — Pesta Menuai Padi masyarakat Kadazandusun Sabah. Upacara syukur kepada Bambaazon (semangat padi) yang memberi rezeki berlimpah.</p>
+        <ul class="ic-list">
+          <li>30–31 Mei setiap tahun di Sabah</li>
           <li>Tarian Sumazau yang memukau</li>
           <li>Pertandingan Unduk Ngadau (Ratu Pesta)</li>
-          <li>Minuman tradisi Lihing & Tapai</li>
           <li>Muzik Kulintangan & Sompoton</li>
-          <li>Hidangan tradisi Kadazandusun</li>
+          <li>Minuman tradisi Lihing & Tapai</li>
+          <li>Hidangan Hinava & Bosou khas</li>
         </ul>
       </div>
-      <div class="info-card aidiladha">
-        <div class="card-glow"></div>
-        <span class="card-icon">🌙</span>
-        <div class="card-title">Hari Raya Aidiladha</div>
-        <p class="card-desc">Hari Raya Aidiladha atau Hari Raya Korban adalah perayaan umat Islam untuk memperingati pengorbanan Nabi Ibrahim a.s. yang penuh makna.</p>
-        <ul class="card-list">
-          <li>Tarikh: 27 Mei 2026 / 10 Zulhijjah</li>
-          <li>Solat Aidiladha di pagi hari</li>
-          <li>Ibadah korban (ternakan)</li>
-          <li>Musim Haji di Mekah al-Mukarramah</li>
-          <li>Makan-makan & bersilaturrahim</li>
-          <li>Baju raya & ziarah sanak saudara</li>
-        </ul>
-      </div>
-      <div class="info-card unity">
-        <div class="card-glow"></div>
-        <span class="card-icon">🤝</span>
-        <div class="card-title">Sabah Bersatu</div>
-        <p class="card-desc">Di Sabah, kedua-dua perayaan ini disambut bersama-sama oleh semua kaum dalam semangat 1Malaysia yang penuh kasih sayang dan hormat-menghormati.</p>
-        <ul class="card-list">
-          <li>Rumah terbuka meraikan semua</li>
-          <li>Toleransi & hormat antara agama</li>
-          <li>Masakan pelbagai kaum bergabung</li>
-          <li>Keunikan Sabah — Land Below the Wind</li>
-          <li>Perpaduan melalui budaya</li>
-          <li>Jiran-jiran berbilang kaum bersama</li>
+      <div class="ic ic-unity reveal" style="transition-delay:.3s">
+        <div class="ic-shine"></div>
+        <span class="ic-emoji">🤝</span>
+        <div class="ic-title">Sabah Bersatu</div>
+        <p class="ic-text">Di bumi Sabah, dua perayaan besar ini jatuh dalam bulan yang sama — Mei 2026! Satu keajaiban perpaduan yang mengagumkan di Land Below the Wind.</p>
+        <ul class="ic-list">
+          <li>40+ kaum hidup harmoni di Sabah</li>
+          <li>Rumah terbuka meraikan semua kaum</li>
+          <li>Masakan pelbagai budaya bercantum</li>
+          <li>Toleransi agama yang tinggi</li>
+          <li>Keunikan Malaysia yang tiada tandingan</li>
+          <li>Mei 2026 — Bulan Perayaan Ganda!</li>
         </ul>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- DANCE ANIMATION -->
-  <section class="dance-section reveal" id="dance">
-    <div class="section-title">💃 Tarian Sumazau</div>
-    <div class="section-sub">Tarian Tradisi Warisan Kadazandusun</div>
-    <div class="dance-stage">
-      <span class="dance-note">♪</span>
-      <span class="dance-note">♫</span>
-      <span class="dance-note">♩</span>
-      <div class="dancer dancer-1">
-        <div class="dancer-head"></div>
-        <div class="dancer-body">
-          <div class="dancer-arm-l"></div>
-          <div class="dancer-arm-r"></div>
-        </div>
-        <div class="dancer-legs">
-          <div class="dancer-leg"></div>
-          <div class="dancer-leg"></div>
-        </div>
+<!-- MUSIC SECTION -->
+<section class="section music-section reveal" id="music">
+  <div class="section-inner">
+    <div class="sec-header">
+      <div class="sec-eyebrow">🎵 Alunan Muzik</div>
+      <div class="sec-title gold-text">Lagu Raya × Lagu Dusun</div>
+      <div class="sec-divider">
+        <div class="sd-line"></div>
+        <div class="sd-dot"></div>
+        <div class="sd-line r"></div>
       </div>
-      <div class="dancer dancer-2">
-        <div class="dancer-head"></div>
-        <div class="dancer-body">
-          <div class="dancer-arm-l"></div>
-          <div class="dancer-arm-r"></div>
-        </div>
-        <div class="dancer-legs">
-          <div class="dancer-leg"></div>
-          <div class="dancer-leg"></div>
-        </div>
-      </div>
-      <div class="dancer dancer-3">
-        <div class="dancer-head"></div>
-        <div class="dancer-body">
-          <div class="dancer-arm-l"></div>
-          <div class="dancer-arm-r"></div>
-        </div>
-        <div class="dancer-legs">
-          <div class="dancer-leg"></div>
-          <div class="dancer-leg"></div>
-        </div>
-      </div>
-      <div class="stage-floor"></div>
+      <p style="font-size:.82rem;color:rgba(255,255,255,.4);margin-top:.5rem">Mix spesial — Lagu Aidiladha & Lagu Dusun Kaamatan dalam satu playlist</p>
     </div>
-    <div class="dance-label">🥁 Sumazau — Tarian Syukur Kadazandusun 🥁</div>
-  </section>
 
-  <!-- ICONS -->
-  <section class="icons-section reveal">
-    <div class="section-title">✨ Simbol Perayaan</div>
-    <div class="section-sub">Lambang Yang Menyatukan Kita</div>
-    <div class="icons-row">
-      <div class="icon-item">
-        <div class="icon-bubble green-bg" style="animation-delay:0s">🌾</div>
-        <span class="icon-label">Padi Kaamatan</span>
+    <div class="player-layout">
+      <!-- PLAYLIST -->
+      <div class="playlist reveal-left">
+        <div class="pl-header">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 4.5L9.5 7L5.5 9.5V4.5Z" fill="currentColor"/></svg>
+          Senarai Lagu — 6 Tracks
+        </div>
+        <div class="pl-track active" onclick="playTrack(0,this)" id="pt0">
+          <div class="pl-num">1</div>
+          <div class="pl-info">
+            <div class="pl-title">Kompilasi Lagu Raya Aidiladha 2025</div>
+            <div class="pl-sub">Lagu Raya Haji Paling Meriah</div>
+          </div>
+          <span class="pl-badge badge-raya">Raya</span>
+        </div>
+        <div class="pl-track" onclick="playTrack(1,this)" id="pt1">
+          <div class="pl-num">2</div>
+          <div class="pl-info">
+            <div class="pl-title">DJ Remix Dusun — Kaamatan 2026</div>
+            <div class="pl-sub">Full Bass • Vokal Edge</div>
+          </div>
+          <span class="pl-badge badge-dusun">Dusun</span>
+        </div>
+        <div class="pl-track" onclick="playTrack(2,this)" id="pt2">
+          <div class="pl-num">3</div>
+          <div class="pl-info">
+            <div class="pl-title">Lagu Raya Aidiladha Trending 2025</div>
+            <div class="pl-sub">Sesuci Lebaran & More</div>
+          </div>
+          <span class="pl-badge badge-raya">Raya</span>
+        </div>
+        <div class="pl-track" onclick="playTrack(3,this)" id="pt3">
+          <div class="pl-num">4</div>
+          <div class="pl-info">
+            <div class="pl-title">Sumazau Pusing (Oh Kaamatan)</div>
+            <div class="pl-sub">True Echo — Acapella</div>
+          </div>
+          <span class="pl-badge badge-dusun">Dusun</span>
+        </div>
+        <div class="pl-track" onclick="playTrack(4,this)" id="pt4">
+          <div class="pl-num">5</div>
+          <div class="pl-info">
+            <div class="pl-title">Lagu Raya Aidiladha 2024</div>
+            <div class="pl-sub">Bila Hari Raya Menjelma</div>
+          </div>
+          <span class="pl-badge badge-raya">Raya</span>
+        </div>
+        <div class="pl-track" onclick="playTrack(5,this)" id="pt5">
+          <div class="pl-num">6</div>
+          <div class="pl-info">
+            <div class="pl-title">Lagu Kaamatan — Penyanyi Sabah</div>
+            <div class="pl-sub">Lagu Dusun Klasik</div>
+          </div>
+          <span class="pl-badge badge-dusun">Dusun</span>
+        </div>
       </div>
-      <div class="icon-item">
-        <div class="icon-bubble gold-bg" style="animation-delay:0.3s">🌙</div>
-        <span class="icon-label">Bulan Sabit Aidiladha</span>
-      </div>
-      <div class="icon-item">
-        <div class="icon-bubble green-bg" style="animation-delay:0.6s">🎭</div>
-        <span class="icon-label">Sumazau Dance</span>
-      </div>
-      <div class="icon-item">
-        <div class="icon-bubble gold-bg" style="animation-delay:0.9s">🐑</div>
-        <span class="icon-label">Ibadah Korban</span>
-      </div>
-      <div class="icon-item">
-        <div class="icon-bubble green-bg" style="animation-delay:1.2s">🎶</div>
-        <span class="icon-label">Lagu Dusun</span>
-      </div>
-      <div class="icon-item">
-        <div class="icon-bubble gold-bg" style="animation-delay:1.5s">🎁</div>
-        <span class="icon-label">Rumah Terbuka</span>
-      </div>
-      <div class="icon-item">
-        <div class="icon-bubble green-bg" style="animation-delay:1.8s">🥘</div>
-        <span class="icon-label">Hinava & Rendang</span>
-      </div>
-      <div class="icon-item">
-        <div class="icon-bubble gold-bg" style="animation-delay:2.1s">🏔️</div>
-        <span class="icon-label">Sabah Bumi Kita</span>
-      </div>
-    </div>
-  </section>
 
-  <!-- MUSIC SECTION -->
-  <section class="music-section reveal" id="music">
-    <div class="music-header">
-      <div class="section-title">🎵 Lagu Dusun Kaamatan</div>
-      <div class="music-subtitle">Dendangan Jiwa Kadazandusun — Warisan Budaya Sabah</div>
-    </div>
-    <div class="music-player-wrap">
-      <div class="video-tabs">
-        <button class="video-tab-btn active" onclick="switchVideo(0, this)">🎧 DJ Remix Kaamatan 2026</button>
-        <button class="video-tab-btn" onclick="switchVideo(1, this)">💃 Sumazau Pusing</button>
-        <button class="video-tab-btn" onclick="switchVideo(2, this)">🌾 Lagu Kaamatan</button>
-        <button class="video-tab-btn" onclick="switchVideo(3, this)">🎤 Virtual Choir</button>
-      </div>
-      <div class="video-frame-wrap">
-        <iframe
-          id="youtubePlayer"
-          src="https://www.youtube.com/embed/GIK6oKiGu-I?rel=0&autoplay=0"
-          title="Lagu Dusun Kaamatan"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
-      </div>
-      <div class="video-info">
-        <div class="vi-title" id="videoTitle">🎧 DJ REMIX DUSUN — LAGU SPECIAL KAAMATAN 2026</div>
-        <div class="vi-desc" id="videoDesc">Full Bass • Vokal Edge • Lagu Istimewa Kaamatan 2026 dari YouTube</div>
+      <!-- VIDEO -->
+      <div class="video-wrap reveal-right">
+        <div class="video-ratio">
+          <iframe id="ytPlayer"
+            src="https://www.youtube.com/embed/jJsls3wcCxo?rel=0&autoplay=0"
+            title="Lagu Kaamatan Aidiladha"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <div class="video-caption">
+          <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.3rem">
+            <div>
+              <div class="vc-title" id="vcTitle">🎵 Kompilasi Lagu Raya Aidiladha 2025</div>
+              <div class="vc-desc" id="vcDesc">Lagu Raya Haji Paling Meriah & Menyentuh Hati — YouTube</div>
+            </div>
+            <div class="eq-bars">
+              <div class="eq-bar" style="height:40%"></div>
+              <div class="eq-bar" style="height:60%"></div>
+              <div class="eq-bar" style="height:100%"></div>
+              <div class="eq-bar" style="height:40%"></div>
+              <div class="eq-bar" style="height:80%"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- GREETINGS -->
-  <section class="greetings-section reveal" id="greetings">
-    <div class="section-title">💌 Ucapan Perayaan</div>
-    <div class="section-sub">Dari Hati Ke Hati — Words From The Heart</div>
+<!-- UCAPAN RAYA / GREETINGS -->
+<section class="section reveal" id="ucapan">
+  <div class="section-inner">
+    <div class="sec-header">
+      <div class="sec-eyebrow">💌 Dari Hati Ke Hati</div>
+      <div class="sec-title">Ucapan <span style="background:linear-gradient(135deg,var(--gold),var(--green2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Perayaan</span></div>
+      <div class="sec-divider">
+        <div class="sd-line"></div>
+        <div class="sd-dot" style="background:var(--green2)"></div>
+        <div class="sd-line r"></div>
+      </div>
+      <p style="font-size:.82rem;color:rgba(255,255,255,.4);margin-top:.5rem">Ucapan ikhlas sempena dua perayaan agung — boleh <strong style="color:rgba(255,255,255,.6)">screenshot & kongsi!</strong></p>
+    </div>
+
     <div class="greetings-grid">
-      <div class="greeting-card g-kaamatan">
-        <div class="greeting-emoji">🌾</div>
-        <div class="greeting-big">Kotobian Tadau Kaamatan!</div>
-        <div class="greeting-meaning">Selamat Hari Pesta Kaamatan!</div>
-        <div class="greeting-text">
-          Semoga hasil tuaian berlimpah-ruah, semangat bersatu-padu menjadi kekuatan, dan tradisi Kadazandusun terus diwarisi dengan penuh kebanggaan. 🌱
+
+      <!-- AIDILADHA CARD -->
+      <div class="gc gc-raya reveal" style="transition-delay:.1s">
+        <div class="gc-bg">
+          <div class="gc-glow"></div>
+          <span class="gc-corner tl">🌙</span>
+          <span class="gc-corner tr">⭐</span>
+          <span class="gc-corner bl">🕌</span>
+          <span class="gc-corner br">🌙</span>
+          <div>
+            <div class="gc-icon">🌙</div>
+            <div class="gc-main">Selamat Hari Raya Aidiladha!</div>
+            <div class="gc-arabic">عيد أضحى مبارك سعيد</div>
+            <div class="gc-meaning">Eid Adha Mubarak — Semoga diberkati</div>
+          </div>
+          <div class="gc-msg">
+            Semoga ibadah korban kita diterima Allah SWT. Semoga hati sentiasa ikhlas, iman sentiasa teguh, dan ukhuwah kita semakin erat. <strong style="color:var(--gold3)">Maaf zahir dan batin.</strong> 🤲
+          </div>
+          <div style="font-size:.7rem;color:rgba(255,255,255,.2);text-transform:uppercase;letter-spacing:.15em">
+            10 Zulhijjah 1447H • 27 Mei 2026
+          </div>
         </div>
       </div>
-      <div class="greeting-card g-aidiladha">
-        <div class="greeting-emoji">🌙</div>
-        <div class="greeting-big">Selamat Hari Raya Aidiladha!</div>
-        <div class="greeting-meaning" style="font-family:'Amiri',serif;font-size:1rem;color:#f4c430">عيد أضحى مبارك</div>
-        <div class="greeting-text">
-          Semoga ibadah korban diterima Allah SWT, hati dikuatkan dengan iman, dan ukhuwah sesama Muslim serta sesama rakyat Malaysia semakin erat. 🤲
+
+      <!-- KAAMATAN CARD -->
+      <div class="gc gc-kaamatan reveal" style="transition-delay:.2s">
+        <div class="gc-bg">
+          <div class="gc-glow"></div>
+          <span class="gc-corner tl">🌾</span>
+          <span class="gc-corner tr">🌿</span>
+          <span class="gc-corner bl">💚</span>
+          <span class="gc-corner br">🌾</span>
+          <div>
+            <div class="gc-icon">🌾</div>
+            <div class="gc-main">Kotobian Tadau Kaamatan!</div>
+            <div style="font-size:.85rem;color:rgba(124,185,66,.7);font-style:italic;margin:.4rem 0">"Selamat Hari Pesta Kaamatan"</div>
+            <div class="gc-meaning">Minum air dengan gelas, sudah jumpa jangan dilepas</div>
+          </div>
+          <div class="gc-msg">
+            Semoga hasil tuaian berlimpah-ruah, semangat Kadazandusun terus berkobar, dan tradisi nenek moyang kita kekal diwarisi dengan penuh kebanggaan. <strong style="color:var(--green3)">Kopivosian!</strong> 🌱
+          </div>
+          <div style="font-size:.7rem;color:rgba(255,255,255,.2);text-transform:uppercase;letter-spacing:.15em">
+            30–31 Mei 2026 • Sabah, Malaysia
+          </div>
         </div>
       </div>
-      <div class="greeting-card g-unity">
-        <div class="greeting-emoji">🇲🇾</div>
-        <div class="greeting-big">Sabah Bersatu!</div>
-        <div class="greeting-meaning">Land Below the Wind — Bumi Berbilang Kaum</div>
-        <div class="greeting-text">
-          Dua perayaan, satu semangat. Kaamatan dan Aidiladha mengajar kita erti syukur dan pengorbanan. Bersama kita meraikan keindahan kepelbagaian Sabah. 🏔️🤝
+
+      <!-- UNITY CARD -->
+      <div class="gc gc-unity reveal" style="transition-delay:.3s">
+        <div class="gc-bg">
+          <div class="gc-glow"></div>
+          <span class="gc-corner tl">🇲🇾</span>
+          <span class="gc-corner tr">🏔️</span>
+          <span class="gc-corner bl">🤝</span>
+          <span class="gc-corner br">❤️</span>
+          <div>
+            <div class="gc-icon">🇲🇾</div>
+            <div class="gc-main">Sabah Bersatu 2026!</div>
+            <div style="font-size:.82rem;color:rgba(195,154,223,.7);font-style:italic;margin:.4rem 0">Land Below the Wind — Bumi Kita</div>
+            <div class="gc-meaning">Kepelbagaian adalah kekuatan kita</div>
+          </div>
+          <div class="gc-msg">
+            Dua perayaan, satu jiwa. Kaamatan mengajar syukur, Aidiladha mengajar pengorbanan. Bersama kita jadikan Sabah contoh terbaik perpaduan di dunia! <strong style="color:#c39adf">Bersatu Teguh!</strong> 🏔️
+          </div>
+          <div style="font-size:.7rem;color:rgba(255,255,255,.2);text-transform:uppercase;letter-spacing:.15em">
+            Mei 2026 • Sabah Malaysia 🇲🇾
+          </div>
         </div>
       </div>
+
     </div>
-  </section>
+  </div>
+</section>
 
-</main>
+<!-- CELEBRATE CTA -->
+<div class="celebrate-wrap reveal">
+  <div class="cel-label">✨ Tekan untuk meledakkan fireworks ✨</div>
+  <button class="btn-celebrate" onclick="triggerMegaCelebration()">
+    🎆 SELAMAT MERAIKAN! 🎆
+  </button>
+  <p style="margin-top:1.5rem;font-size:.75rem;color:rgba(255,255,255,.2)">
+    Kotobian Tadau Kaamatan! &nbsp;•&nbsp; Selamat Hari Raya Aidiladha! &nbsp;•&nbsp; Maaf Zahir & Batin
+  </p>
+</div>
 
-<!-- ===== FOOTER ===== -->
+<!-- FOOTER -->
 <footer>
-  <div class="footer-logo">🌾 Sabah Bersatu 2026 🌙</div>
-  <div class="footer-flags">🇲🇾</div>
-  <div class="footer-text">
-    Dibuat dengan <span class="footer-heart">♥</span> untuk semua rakyat Sabah yang berbilang kaum.<br/>
-    Kotobian Tadau Kaamatan! • Selamat Hari Raya Aidiladha! • Maaf Zahir & Batin<br/>
-    <span style="opacity:0.3;font-size:0.75rem">© 2026 Sabah Bersatu — Semua hak terpelihara</span>
+  <div class="ft-logo">🌾 Sabah Bersatu × Kaamatan × Aidiladha 2026 🌙</div>
+  <div class="ft-flags">🇲🇾</div>
+  <div class="ft-text">
+    Dibuat dengan <span class="ft-heart">♥</span> untuk semua rakyat Sabah yang berbilang kaum.<br/>
+    <em style="color:rgba(255,255,255,.2);font-style:normal">© 2026 Sabah Bersatu — Semua Hak Terpelihara</em>
   </div>
 </footer>
 
-<!-- ===== SCRIPTS ===== -->
+<!-- ==================== SCRIPTS ==================== -->
 <script>
-/* ===========================
-   STARS
-=========================== */
-(function createStars() {
-  const container = document.getElementById('stars');
-  for (let i = 0; i < 120; i++) {
-    const star = document.createElement('div');
-    star.className = 'star';
-    const size = Math.random() * 3 + 1;
-    star.style.cssText = `
-      width:${size}px; height:${size}px;
-      left:${Math.random()*100}%;
-      top:${Math.random()*100}%;
-      animation-duration:${Math.random()*3+2}s;
-      animation-delay:${Math.random()*4}s;
+"use strict";
+
+/* ==============================
+   SPARKLES
+============================== */
+(function(){
+  const c = document.getElementById('sparkles');
+  const cols = ['#f4c430','#ffe066','#7cb942','#a8e063','#fff','#e91e8c','#9b59b6'];
+  for(let i=0;i<60;i++){
+    const s = document.createElement('div');
+    s.className='sp';
+    const size = Math.random()*4+1;
+    s.style.cssText=`
+      width:${size}px;height:${size}px;
+      left:${Math.random()*100}%;top:${Math.random()*100}%;
+      background:${cols[Math.floor(Math.random()*cols.length)]};
+      animation-duration:${Math.random()*4+2}s;
+      animation-delay:${Math.random()*5}s;
+      box-shadow:0 0 ${size*3}px currentColor;
     `;
-    container.appendChild(star);
+    c.appendChild(s);
   }
 })();
 
-/* ===========================
-   PARTICLES
-=========================== */
-(function createParticles() {
-  const container = document.getElementById('particles');
-  const colors = ['#f4a825','#ffe066','#7cb942','#2e8b57','#f4c430','#a8e063','#fff'];
-  for (let i = 0; i < 30; i++) {
-    const p = document.createElement('div');
-    p.className = 'particle';
-    const size = Math.random() * 6 + 2;
-    const color = colors[Math.floor(Math.random()*colors.length)];
-    p.style.cssText = `
-      width:${size}px; height:${size}px;
+/* ==============================
+   FLOATERS
+============================== */
+(function(){
+  const c = document.getElementById('floaters');
+  const items = ['🌾','🌙','⭐','✨','🌿','🎊','🎉','🕌','💫','🌟','🎋','🌺','🔥','💛','💚'];
+  for(let i=0;i<25;i++){
+    const f = document.createElement('div');
+    f.className='floater';
+    f.textContent = items[i%items.length];
+    f.style.cssText=`
       left:${Math.random()*100}%;
-      background:${color};
-      animation-duration:${Math.random()*12+8}s;
-      animation-delay:${Math.random()*8}s;
-      box-shadow: 0 0 ${size*2}px ${color};
+      animation-duration:${Math.random()*14+10}s;
+      animation-delay:${Math.random()*12}s;
+      font-size:${Math.random()*1.2+.7}rem;
+      filter:opacity(.7);
     `;
-    container.appendChild(p);
+    c.appendChild(f);
   }
 })();
 
-/* ===========================
-   LANTERNS
-=========================== */
-(function createLanterns() {
-  const container = document.getElementById('lanterns');
-  const lanternSVG = (color1, color2) => `
-    <svg width="24" height="36" viewBox="0 0 24 36" fill="none">
-      <line x1="12" y1="0" x2="12" y2="4" stroke="${color1}" stroke-width="1.5"/>
-      <ellipse cx="12" cy="20" rx="9" ry="14" fill="${color1}" opacity="0.85"/>
-      <ellipse cx="12" cy="20" rx="6" ry="11" fill="${color2}" opacity="0.4"/>
-      <line x1="12" y1="34" x2="12" y2="36" stroke="${color1}" stroke-width="1.5"/>
-      <ellipse cx="12" cy="20" rx="9" ry="3" fill="${color2}" opacity="0.3"/>
-      <filter id="glow"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-    </svg>
-  `;
-  const colors = [['#f4a825','#ffe066'],['#2e8b57','#7cb942'],['#f4c430','#fff'],['#ff6b35','#ffa05a']];
-  for (let i = 0; i < 12; i++) {
-    const l = document.createElement('div');
-    l.className = 'lantern';
-    const [c1,c2] = colors[i % colors.length];
-    l.innerHTML = lanternSVG(c1,c2);
-    l.style.cssText = `
-      left:${Math.random()*100}%;
-      animation-duration:${Math.random()*15+12}s;
-      animation-delay:${Math.random()*10}s;
-    `;
-    container.appendChild(l);
-  }
-})();
+/* ==============================
+   PARTICLE SYSTEM (trails)
+============================== */
+const pCvs = document.getElementById('particleCanvas');
+const pCtx = pCvs.getContext('2d');
+let pw, ph;
+function resizeP(){pw=pCvs.width=window.innerWidth;ph=pCvs.height=window.innerHeight}
+resizeP(); window.addEventListener('resize',resizeP);
 
-/* ===========================
-   RICE STALKS
-=========================== */
-(function createRiceStalks() {
-  const container = document.getElementById('riceStalks');
-  for (let i = 0; i < 20; i++) {
-    const stalk = document.createElement('div');
-    stalk.className = 'rice-stalk';
-    const h = Math.random() * 80 + 60;
-    stalk.style.cssText = `
-      left:${Math.random()*100}%;
-      height:${h}px;
-      animation-duration:${Math.random()*2+1.5}s;
-      animation-delay:${Math.random()*2}s;
-      opacity:${Math.random()*0.5+0.3};
-    `;
-    container.appendChild(stalk);
+const particles=[];
+class Particle{
+  constructor(x,y,type){
+    this.x=x;this.y=y;
+    this.type=type||'star';
+    this.size=Math.random()*3+1;
+    this.vx=(Math.random()-.5)*1.5;
+    this.vy=(Math.random()-.5)*1.5-0.5;
+    const palettes={
+      gold:['#f4c430','#ffe066','#ff9d00','#f4a825'],
+      green:['#7cb942','#a8e063','#2e8b57','#4caf50'],
+      mixed:['#f4c430','#7cb942','#fff','#e91e8c','#9b59b6']
+    };
+    const p = palettes[['gold','green','mixed'][Math.floor(Math.random()*3)]];
+    this.color=p[Math.floor(Math.random()*p.length)];
+    this.alpha=1;this.life=0;
+    this.maxLife=Math.random()*120+60;
   }
-})();
-
-/* ===========================
-   BACKGROUND CANVAS — Waves
-=========================== */
-(function bgCanvas() {
-  const canvas = document.getElementById('bgCanvas');
-  const ctx = canvas.getContext('2d');
-  let w, h, time = 0;
-  function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
-  resize();
-  window.addEventListener('resize', resize);
-  function draw() {
-    ctx.clearRect(0,0,w,h);
-    // gradient bg
-    const grad = ctx.createLinearGradient(0,0,w,h);
-    grad.addColorStop(0,'rgba(5,5,20,0.98)');
-    grad.addColorStop(0.5,'rgba(8,25,15,0.98)');
-    grad.addColorStop(1,'rgba(20,10,5,0.98)');
-    ctx.fillStyle = grad;
-    ctx.fillRect(0,0,w,h);
-    // waves
-    for (let j = 0; j < 4; j++) {
-      ctx.beginPath();
-      const y0 = h * (0.3 + j*0.15);
-      ctx.moveTo(0, y0);
-      for (let x = 0; x <= w; x += 8) {
-        const y = y0 + Math.sin((x/w)*Math.PI*2 + time + j*0.8) * 30;
-        ctx.lineTo(x, y);
-      }
-      ctx.lineTo(w,h); ctx.lineTo(0,h); ctx.closePath();
-      const wGrad = ctx.createLinearGradient(0,y0-30,0,y0+30);
-      if (j%2===0) {
-        wGrad.addColorStop(0,'rgba(46,139,87,0.04)');
-        wGrad.addColorStop(1,'rgba(46,139,87,0)');
-      } else {
-        wGrad.addColorStop(0,'rgba(244,168,37,0.03)');
-        wGrad.addColorStop(1,'rgba(244,168,37,0)');
-      }
-      ctx.fillStyle = wGrad;
-      ctx.fill();
-    }
-    time += 0.008;
-    requestAnimationFrame(draw);
+  update(){
+    this.x+=this.vx;this.y+=this.vy;
+    this.vy+=0.02;this.vx*=0.99;
+    this.life++;
+    this.alpha=Math.max(0,1-this.life/this.maxLife);
+    this.size*=0.997;
   }
-  draw();
-})();
-
-/* ===========================
-   COUNTDOWN
-=========================== */
-const EVENTS = {
-  aidiladha: new Date('2026-05-27T08:00:00+08:00'),
-  kaamatan:  new Date('2026-05-30T00:00:00+08:00')
-};
-let currentEvent = 'aidiladha';
-function switchCountdown(event, btn) {
-  currentEvent = event;
-  document.querySelectorAll('.countdown-tab').forEach(b => {
-    b.classList.remove('active','gold','green');
-  });
-  btn.classList.add('active', event === 'aidiladha' ? 'gold' : 'green');
-  const boxes = document.querySelectorAll('.count-box');
-  boxes.forEach(b => { b.classList.remove('gold','green'); b.classList.add(event === 'aidiladha' ? 'gold' : 'green'); });
-  updateCountdown();
+  draw(){
+    pCtx.save();
+    pCtx.globalAlpha=this.alpha;
+    pCtx.fillStyle=this.color;
+    pCtx.shadowBlur=10;pCtx.shadowColor=this.color;
+    pCtx.beginPath();
+    pCtx.arc(this.x,this.y,this.size,0,Math.PI*2);
+    pCtx.fill();
+    pCtx.restore();
+  }
 }
-function updateCountdown() {
-  const now = new Date();
-  const target = EVENTS[currentEvent];
-  const diff = target - now;
-  if (diff <= 0) {
-    document.getElementById('countdownDisplay').style.display = 'none';
-    document.getElementById('expiredMsg').style.display = 'block';
-    return;
-  }
-  document.getElementById('countdownDisplay').style.display = 'flex';
-  document.getElementById('expiredMsg').style.display = 'none';
-  const days    = Math.floor(diff / 86400000);
-  const hours   = Math.floor((diff % 86400000) / 3600000);
-  const minutes = Math.floor((diff % 3600000) / 60000);
-  const seconds = Math.floor((diff % 60000) / 1000);
-  function setVal(id, val) {
-    const el = document.getElementById(id);
-    const str = String(val).padStart(2,'0');
-    if (el.textContent !== str) { el.textContent = str; el.style.animation='none'; void el.offsetWidth; el.style.animation=''; }
-  }
-  setVal('days', days); setVal('hours', hours); setVal('minutes', minutes); setVal('seconds', seconds);
-}
-updateCountdown();
-setInterval(updateCountdown, 1000);
 
-/* ===========================
-   VIDEO PLAYER
-=========================== */
-const VIDEOS = [
-  { id:'GIK6oKiGu-I', title:'🎧 DJ REMIX DUSUN — LAGU SPECIAL KAAMATAN 2026', desc:'Full Bass • Vokal Edge • Tracklist: Norikot Nodi Bulan Lima, Kaamatan Norikot Kawagu, Muli Kaamatan, Tadau Kaamatan' },
-  { id:'xCF9bxL_DyA', title:'💃 SUMAZAU PUSING (Oh Kaamatan) — TRUE ECHO Acapella', desc:'Lagu Sumazau moden dengan sentuhan acapella — Tarian tradisi Kadazan Dusun Sabah' },
-  { id:'mTv_WGZ8qug', title:'🌾 LAGU KAAMATAN — Lagu Dusun Penyanyi Wanita Sabah', desc:'Lagu istimewa menyambut Pesta Kaamatan — Bulan Mei bermakna Pesta Kaamatan di Sabah' },
-  { id:'86xw6TZuBQc', title:'🎤 VIRTUAL CHOIR — KASAKAZAN BAMBAZON (2021)', desc:'Lagu etnik Kadazan Dusun sempena Pesta Menuai Negeri Sabah — Persembahan Koir AYU Sabahan' },
+// ambient particle emitter
+let ambientTimer=0;
+function emitAmbient(){
+  if(ambientTimer++%4===0){
+    particles.push(new Particle(
+      Math.random()*pw,
+      Math.random()*ph
+    ));
+  }
+}
+
+function animParticles(){
+  pCtx.clearRect(0,0,pw,ph);
+  emitAmbient();
+  for(let i=particles.length-1;i>=0;i--){
+    particles[i].update();
+    particles[i].draw();
+    if(particles[i].alpha<=0||particles[i].life>particles[i].maxLife)particles.splice(i,1);
+  }
+  requestAnimationFrame(animParticles);
+}
+animParticles();
+
+/* ==============================
+   FIREWORKS
+============================== */
+const fCvs = document.getElementById('fwCanvas');
+const fCtx = fCvs.getContext('2d');
+let fw, fh;
+function resizeFW(){fw=fCvs.width=window.innerWidth;fh=fCvs.height=window.innerHeight}
+resizeFW();window.addEventListener('resize',resizeFW);
+
+const fireworks=[],fwSparks=[];
+const FW_COLORS=[
+  ['#f4c430','#ffe066','#ff9d00'],
+  ['#7cb942','#a8e063','#2e8b57'],
+  ['#e91e8c','#ff6bb5','#c2185b'],
+  ['#9b59b6','#c39adf','#6c3483'],
+  ['#fff','#e0e0e0','#bdbdbd'],
+  ['#ff6b35','#ff8c5a','#e64a0a'],
+  ['#00bcd4','#4dd0e1','#0097a7'],
 ];
-function switchVideo(idx, btn) {
-  document.querySelectorAll('.video-tab-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  const v = VIDEOS[idx];
-  document.getElementById('youtubePlayer').src = `https://www.youtube.com/embed/${v.id}?rel=0`;
-  document.getElementById('videoTitle').textContent = v.title;
-  document.getElementById('videoDesc').textContent = v.desc;
-}
 
-/* ===========================
-   CONFETTI
-=========================== */
-const confettiCanvas = document.getElementById('confettiCanvas');
-const cctx = confettiCanvas.getContext('2d');
-confettiCanvas.width = window.innerWidth;
-confettiCanvas.height = window.innerHeight;
-window.addEventListener('resize', () => {
-  confettiCanvas.width = window.innerWidth;
-  confettiCanvas.height = window.innerHeight;
-});
-let confettiPieces = [];
-function launchConfetti(x, y) {
-  const colors = ['#f4a825','#ffe066','#7cb942','#2e8b57','#fff','#f4c430','#a8e063','#ff6b35','#b48adf'];
-  for (let i = 0; i < 120; i++) {
-    confettiPieces.push({
-      x: x || Math.random()*confettiCanvas.width,
-      y: y || -10,
-      vx: (Math.random()-0.5)*10,
-      vy: Math.random()*6+2,
-      color: colors[Math.floor(Math.random()*colors.length)],
-      size: Math.random()*8+3,
-      rotation: Math.random()*360,
-      rotV: (Math.random()-0.5)*8,
-      shape: Math.random() > 0.5 ? 'rect' : 'circle',
-      alpha: 1,
-      life: 0,
-      maxLife: Math.random()*180+120
+class FWShell{
+  constructor(){
+    this.x=fw*(.1+Math.random()*.8);
+    this.y=fh;
+    this.tx=fw*(.1+Math.random()*.8);
+    this.ty=fh*(.1+Math.random()*.45);
+    this.speed=14+Math.random()*6;
+    const dx=this.tx-this.x,dy=this.ty-this.y;
+    const dist=Math.hypot(dx,dy);
+    this.vx=dx/dist*this.speed;
+    this.vy=dy/dist*this.speed;
+    this.trail=[];
+    this.colors=FW_COLORS[Math.floor(Math.random()*FW_COLORS.length)];
+    this.exploded=false;
+  }
+  update(){
+    this.trail.push({x:this.x,y:this.y,a:1});
+    this.x+=this.vx;this.y+=this.vy;
+    this.vy+=0.25;
+    if(this.trail.length>12)this.trail.shift();
+    this.trail.forEach(t=>t.a-=0.08);
+    if(this.y<=this.ty||this.vy>0){this.explode();this.exploded=true;}
+  }
+  explode(){
+    const count=100+Math.floor(Math.random()*60);
+    const type=Math.floor(Math.random()*4); // 0=circle,1=star,2=heart,3=ring
+    for(let i=0;i<count;i++){
+      let vx,vy;
+      if(type===0){
+        const a=(i/count)*Math.PI*2;
+        const spd=4+Math.random()*8;
+        vx=Math.cos(a)*spd;vy=Math.sin(a)*spd;
+      }else if(type===1){
+        const a=(i/count)*Math.PI*2;
+        const spd=(i%5===0?10:5)+Math.random()*4;
+        vx=Math.cos(a)*spd;vy=Math.sin(a)*spd;
+      }else if(type===2){
+        // heart shape
+        const t=(i/count)*Math.PI*2;
+        vx=Math.sin(t)**3*10;
+        vy=-(13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t))*0.5;
+      }else{
+        const a=(i/count)*Math.PI*2;
+        const spd=7+Math.random()*2;
+        vx=Math.cos(a)*spd*(0.8+Math.random()*.4);
+        vy=Math.sin(a)*spd*(0.8+Math.random()*.4);
+      }
+      const color=this.colors[Math.floor(Math.random()*this.colors.length)];
+      fwSparks.push({
+        x:this.x,y:this.y,vx,vy,
+        color,alpha:1,size:2+Math.random()*2.5,
+        life:0,maxLife:60+Math.random()*50,
+        trail:[],gravity:0.15
+      });
+    }
+    // glitter burst
+    for(let i=0;i<30;i++){
+      const a=Math.random()*Math.PI*2,spd=1+Math.random()*5;
+      fwSparks.push({
+        x:this.x,y:this.y,
+        vx:Math.cos(a)*spd,vy:Math.sin(a)*spd,
+        color:'#fff',alpha:1,size:.8+Math.random()*1.5,
+        life:0,maxLife:40+Math.random()*30,trail:[],gravity:0.1
+      });
+    }
+  }
+  draw(){
+    this.trail.forEach((t,i)=>{
+      if(t.a<=0)return;
+      fCtx.save();
+      fCtx.globalAlpha=t.a*.6;
+      fCtx.fillStyle='#fff';
+      fCtx.shadowBlur=6;fCtx.shadowColor='#fff';
+      fCtx.beginPath();
+      fCtx.arc(t.x,t.y,2,0,Math.PI*2);
+      fCtx.fill();
+      fCtx.restore();
     });
   }
 }
-function animateConfetti() {
-  cctx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);
-  confettiPieces = confettiPieces.filter(p => p.life < p.maxLife);
-  confettiPieces.forEach(p => {
-    p.x += p.vx; p.y += p.vy;
-    p.vy += 0.12; p.vx *= 0.99;
-    p.rotation += p.rotV;
-    p.life++;
-    p.alpha = Math.max(0, 1 - p.life/p.maxLife);
-    cctx.save();
-    cctx.globalAlpha = p.alpha;
-    cctx.fillStyle = p.color;
-    cctx.translate(p.x, p.y);
-    cctx.rotate(p.rotation * Math.PI/180);
-    if (p.shape === 'rect') cctx.fillRect(-p.size/2, -p.size/4, p.size, p.size/2);
-    else { cctx.beginPath(); cctx.arc(0,0,p.size/2,0,Math.PI*2); cctx.fill(); }
-    cctx.restore();
-  });
-  requestAnimationFrame(animateConfetti);
-}
-animateConfetti();
 
-function triggerCelebration() {
-  for (let i = 0; i < 6; i++) {
-    setTimeout(() => launchConfetti(Math.random()*window.innerWidth, Math.random()*window.innerHeight*0.3), i*200);
+function updateFW(){
+  fCtx.clearRect(0,0,fw,fh);
+  // shells
+  for(let i=fireworks.length-1;i>=0;i--){
+    fireworks[i].update();
+    fireworks[i].draw();
+    if(fireworks[i].exploded)fireworks.splice(i,1);
+  }
+  // sparks
+  for(let i=fwSparks.length-1;i>=0;i--){
+    const s=fwSparks[i];
+    s.trail.push({x:s.x,y:s.y,a:s.alpha});
+    if(s.trail.length>8)s.trail.shift();
+    s.x+=s.vx;s.y+=s.vy;
+    s.vy+=s.gravity;s.vx*=0.97;s.vy*=0.97;
+    s.life++;s.alpha=Math.max(0,1-s.life/s.maxLife);
+    if(s.alpha<=0){fwSparks.splice(i,1);continue}
+    // draw trail
+    s.trail.forEach((t,ti)=>{
+      fCtx.save();
+      fCtx.globalAlpha=t.a*(ti/s.trail.length)*.5;
+      fCtx.fillStyle=s.color;
+      fCtx.beginPath();
+      fCtx.arc(t.x,t.y,s.size*.6,0,Math.PI*2);
+      fCtx.fill();
+      fCtx.restore();
+    });
+    fCtx.save();
+    fCtx.globalAlpha=s.alpha;
+    fCtx.fillStyle=s.color;
+    fCtx.shadowBlur=s.size*4;fCtx.shadowColor=s.color;
+    fCtx.beginPath();
+    fCtx.arc(s.x,s.y,s.size,0,Math.PI*2);
+    fCtx.fill();
+    fCtx.restore();
+  }
+  requestAnimationFrame(updateFW);
+}
+updateFW();
+
+let fwAutoTimer=null;
+function launchFW(count){
+  for(let i=0;i<(count||1);i++){
+    setTimeout(()=>fireworks.push(new FWShell()),i*150);
   }
 }
+function triggerMegaCelebration(){
+  // burst 8 fireworks
+  for(let wave=0;wave<4;wave++){
+    setTimeout(()=>launchFW(2), wave*400);
+  }
+  // also add confetti particles
+  for(let i=0;i<80;i++){
+    setTimeout(()=>{
+      particles.push(new Particle(Math.random()*pw, 0));
+    },i*20);
+  }
+}
+window.triggerMegaCelebration=triggerMegaCelebration;
 
-/* ===========================
-   NAV SCROLL
-=========================== */
-window.addEventListener('scroll', () => {
-  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
+// auto fireworks on load
+setTimeout(()=>launchFW(5), 600);
+setTimeout(()=>launchFW(3), 2500);
+
+// periodic ambient fireworks
+setInterval(()=>{
+  if(Math.random()<0.3)launchFW(1);
+},6000);
+
+/* ==============================
+   COUNTDOWN
+============================== */
+const EVENTS_CD={
+  aidiladha:new Date('2026-05-27T08:00:00+08:00'),
+  kaamatan:new Date('2026-05-30T00:00:00+08:00'),
+};
+let currentCD='aidiladha';
+function switchCD(ev,btn){
+  currentCD=ev;
+  document.querySelectorAll('.cd-btn').forEach(b=>b.classList.remove('active-gold','active-green'));
+  btn.classList.add(ev==='aidiladha'?'active-gold':'active-green');
+  const isGold=ev==='aidiladha';
+  ['fiDays','fiHours','fiMins','fiSecs'].forEach(id=>{
+    const el=document.getElementById(id);
+    el.classList.toggle('green',!isGold);
+  });
+  ['cDays','cHours','cMins','cSecs'].forEach(id=>{
+    const el=document.getElementById(id);
+    el.classList.remove('gold','green');
+    el.classList.add(isGold?'gold':'green');
+  });
+  tickCD();
+}
+function tickCD(){
+  const now=new Date(), diff=EVENTS_CD[currentCD]-now;
+  if(diff<=0){
+    document.getElementById('cdDisplay').style.display='none';
+    document.getElementById('cdExpired').style.display='block';
+    return;
+  }
+  document.getElementById('cdDisplay').style.display='flex';
+  document.getElementById('cdExpired').style.display='none';
+  const d=Math.floor(diff/86400000);
+  const h=Math.floor((diff%86400000)/3600000);
+  const m=Math.floor((diff%3600000)/60000);
+  const s=Math.floor((diff%60000)/1000);
+  function set(id,val){
+    const el=document.getElementById(id);
+    const str=String(val).padStart(2,'0');
+    if(el.textContent!==str){
+      el.style.transform='rotateX(90deg)';
+      el.style.opacity='0';
+      setTimeout(()=>{el.textContent=str;el.style.transform='';el.style.opacity='';},150);
+    }
+  }
+  set('cDays',d);set('cHours',h);set('cMins',m);set('cSecs',s);
+}
+['cDays','cHours','cMins','cSecs'].forEach(id=>{
+  const el=document.getElementById(id);
+  el.style.transition='transform .15s ease,opacity .15s ease';
+});
+tickCD();setInterval(tickCD,1000);
+
+/* ==============================
+   MUSIC PLAYER
+============================== */
+const TRACKS=[
+  {id:'jJsls3wcCxo',title:'🌙 Kompilasi Lagu Raya Aidiladha 2025',desc:'Lagu Raya Haji Paling Meriah & Menyentuh Hati'},
+  {id:'GIK6oKiGu-I',title:'🎧 DJ Remix Dusun — Lagu Kaamatan 2026',desc:'Full Bass Vokal Edge — Norikot Nodi Bulan Lima & More'},
+  {id:'ml3JqhOX1eo',title:'🌙 Lagu Raya Aidiladha Trending 2025',desc:'Sesuci Lebaran, Air Mata Syawal & More'},
+  {id:'xCF9bxL_DyA',title:'💃 Sumazau Pusing (Oh Kaamatan) — True Echo',desc:'Lagu Sumazau Modern Acapella Kaamatan'},
+  {id:'KUBMmtbv3NI',title:'🌙 Lagu Raya Aidiladha 2024',desc:'Bila Hari Raya Menjelma & Koleksi Lagu Raya'},
+  {id:'mTv_WGZ8qug',title:'🌾 Lagu Kaamatan — Penyanyi Wanita Sabah',desc:'Lagu Dusun Klasik Kaamatan Sabah'},
+];
+let activePT=0;
+function playTrack(idx,el){
+  document.querySelectorAll('.pl-track').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  activePT=idx;
+  const t=TRACKS[idx];
+  document.getElementById('ytPlayer').src=`https://www.youtube.com/embed/${t.id}?rel=0&autoplay=1`;
+  document.getElementById('vcTitle').textContent=t.title;
+  document.getElementById('vcDesc').textContent=t.desc;
+}
+
+/* ==============================
+   NAVBAR SCROLL
+============================== */
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('stuck',window.scrollY>60);
+  // update bottom nav highlight
+  const sections=['hero','countdown','music','ucapan'];
+  const bnIds=['bn0','bn1','bn2','bn3'];
+  let active=0;
+  sections.forEach((id,i)=>{
+    const el=document.getElementById(id);
+    if(el&&window.scrollY+80>=el.offsetTop)active=i;
+  });
+  document.querySelectorAll('.bn-item').forEach(b=>b.classList.remove('active'));
+  const bn=document.getElementById('bn'+active);
+  if(bn)bn.classList.add('active');
 });
 
-/* ===========================
-   REVEAL ON SCROLL
-=========================== */
-const revealEls = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
-}, { threshold: 0.1 });
-revealEls.forEach(el => observer.observe(el));
-
-/* ===========================
-   AUTO CONFETTI ON LOAD
-=========================== */
-setTimeout(() => triggerCelebration(), 800);
-setTimeout(() => triggerCelebration(), 2000);
+/* ==============================
+   SCROLL REVEAL
+============================== */
+const revealObserver=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+    }
+  });
+},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>revealObserver.observe(el));
 </script>
 </body>
 </html>
