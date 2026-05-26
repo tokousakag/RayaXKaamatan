@@ -1,0 +1,16 @@
+{
+  "name": "kaamatan-aidiladha-2026",
+  "version": "1.0.0",
+  "description": "Website perayaan Pesta Kaamatan & Hari Raya Aidiladha 2026 - Sabah Bersatu",
+  "scripts": {
+    "dev": "npx serve . -p 3000",
+    "start": "npx serve . -p 3000",
+    "build": "echo 'Static site - no build needed'"
+  },
+  "keywords": ["kaamatan", "aidiladha", "sabah", "malaysia", "2026", "festival"],
+  "author": "Sabah Bersatu 2026",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.0"
+  }
+}
